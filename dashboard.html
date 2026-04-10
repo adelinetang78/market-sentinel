@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Sentinel — High-Impact Post Monitor</title>
+<!-- Live data injected by hourly scan: data/live_data.js -->
+<!-- If the file exists, LIVE_DATA replaces demo posts automatically -->
+<script>var LIVE_DATA = null;</script>
+<script src="data/live_data.js" onerror="console.log('No live data yet — showing demo.')"></script>
+<style>
+  :root {
+    --bg-primary: #080d1a;
+    --bg-card: #0f1729;
+    --bg-card-hover: #141e35;
+    --bg-sidebar: #0a1120;
+    --border: #1e2d4a;
+    --border-bright: #2a4070;
+    --text-primary: #e8edf8;
+    --text-secondary: #8b9fc0;
+    --text-muted: #4a5a7a;
+    --accent-blue: #3b82f6;
+    --accent-cyan: #06b6d4;
+    --red: #ef4444;
+    --red-dim: #7f1d1d;
+    --green: #22c55e;
+    --green-dim: #14532d;
+    --orange: #f97316;
+    --yellow: #eab308;
+    --purple: #a855f7;
+    --score-high: #ef4444;
+    --score-med: #f97316;
+    --score-low: #eab308;
+    --score-base: #22c55e;
+    --x-color: #e7e9ea;
+    --truth-color: #d93025;
+    --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-icon {
+    width: 32px; height: 32px; background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .logo-text { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
+  .logo-text span { color: var(--accent-blue); }
+  .live-badge {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);
+    color: var(--green); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  }
+  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  .topbar-stats { display: flex; gap: 24px; }
+  .stat-item { text-align: center; }
+  .stat-value { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+  .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-value.alert { color: var(--red); }
+  .stat-value.warn { color: var(--orange); }
+
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .refresh-btn {
+    background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3);
+    color: var(--accent-blue); padding: 6px 14px; border-radius: 6px;
+    cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.2s;
+  }
+  .refresh-btn:hover { background: rgba(59,130,246,0.3); }
+  .last-update { font-size: 11px; color: var(--text-muted); }
+
+  /* ── ALERT BANNER ── */
+  .alert-banner {
+    background: linear-gradient(90deg, rgba(239,68,68,0.15), rgba(249,115,22,0.1));
+    border-bottom: 1px solid rgba(239,68,68,0.4);
+    padding: 10px 20px;
+    display: flex; align-items: center; gap: 12px;
+    animation: slideIn 0.5s ease;
+  }
+  @keyframes slideIn { from{transform:translateY(-10px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+  .alert-banner.hidden { display: none; }
+  .alert-icon { font-size: 16px; }
+  .alert-text { flex: 1; font-size: 13px; }
+  .alert-text strong { color: var(--red); }
+  .alert-close { cursor: pointer; color: var(--text-muted); font-size: 18px; line-height: 1; }
+  .alert-close:hover { color: var(--text-primary); }
+
+  /* ── LAYOUT ── */
+  .main-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr 300px;
+    height: calc(100vh - 56px);
+    overflow: hidden;
+  }
+
+  /* ── LEFT SIDEBAR — WATCHLIST ── */
+  .sidebar {
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 0;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .sidebar-section-title {
+    padding: 14px 16px 8px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-muted);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sidebar-section-title span { background: var(--border); color: var(--text-secondary); padding: 1px 6px; border-radius: 8px; font-size: 10px; }
+
+  .person-card {
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer; transition: background 0.15s;
+    border-left: 3px solid transparent;
+  }
+  .person-card:hover { background: rgba(59,130,246,0.05); }
+  .person-card.active { background: rgba(59,130,246,0.1); border-left-color: var(--accent-blue); }
+  .person-card.has-alert { border-left-color: var(--red); }
+
+  .person-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+    position: relative;
+  }
+  .alert-dot {
+    position: absolute; top: -1px; right: -1px;
+    width: 9px; height: 9px; border-radius: 50%; background: var(--red);
+    border: 1.5px solid var(--bg-sidebar); animation: pulse 1.5s infinite;
+  }
+  .person-info { flex: 1; min-width: 0; }
+  .person-name { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .person-role { font-size: 10px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .person-meta { text-align: right; flex-shrink: 0; }
+  .person-count { font-size: 11px; font-weight: 700; color: var(--text-secondary); }
+  .person-platform { font-size: 9px; color: var(--text-muted); }
+
+  /* ── MAIN FEED ── */
+  .feed-area {
+    overflow-y: auto;
+    background: var(--bg-primary);
+  }
+  .feed-area::-webkit-scrollbar { width: 4px; }
+  .feed-area::-webkit-scrollbar-track { background: transparent; }
+  .feed-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .filter-bar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(8,13,26,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .filter-label { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 2px; }
+  .filter-chip {
+    padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    border: 1px solid var(--border); color: var(--text-secondary); cursor: pointer;
+    transition: all 0.15s; background: transparent;
+  }
+  .filter-chip:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+  .filter-chip.active { background: var(--accent-blue); border-color: var(--accent-blue); color: white; }
+  .filter-chip.red.active { background: var(--red); border-color: var(--red); }
+  .filter-chip.green.active { background: var(--green); border-color: var(--green); }
+  .filter-chip.orange.active { background: var(--orange); border-color: var(--orange); }
+  .filter-chip.purple.active { background: var(--purple); border-color: var(--purple); }
+  .filter-divider { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
+
+  .feed-list { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+
+  /* ── POST CARD ── */
+  .post-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: all 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .post-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--score-low);
+    transition: background 0.3s;
+  }
+  .post-card.score-critical::before { background: var(--red); box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+  .post-card.score-high::before { background: var(--orange); }
+  .post-card.score-medium::before { background: var(--yellow); }
+  .post-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); transform: translateY(-1px); box-shadow: var(--shadow); }
+
+  .post-header {
+    display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;
+  }
+  .post-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  .post-author-info { flex: 1; }
+  .post-author-name { font-size: 13px; font-weight: 700; }
+  .post-author-role { font-size: 11px; color: var(--text-muted); }
+  .post-meta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .platform-badge {
+    display: flex; align-items: center; gap: 4px;
+    padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .platform-badge.x { background: rgba(231,233,234,0.1); color: var(--x-color); border: 1px solid rgba(231,233,234,0.2); }
+  .platform-badge.truth { background: rgba(217,48,37,0.15); color: #ff6b6b; border: 1px solid rgba(217,48,37,0.3); }
+  .post-time { font-size: 11px; color: var(--text-muted); }
+
+  .post-content {
+    font-size: 13px; line-height: 1.6; color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+  .post-content .ticker-tag {
+    display: inline-block; background: rgba(59,130,246,0.15); color: #60a5fa;
+    border: 1px solid rgba(59,130,246,0.3); padding: 0px 6px; border-radius: 4px;
+    font-weight: 700; font-size: 12px; margin: 0 2px; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .post-content .ticker-tag:hover { background: rgba(59,130,246,0.3); }
+  .post-content .highlight { color: var(--yellow); font-weight: 600; }
+  .post-content .bullish { color: var(--green); font-weight: 600; }
+  .post-content .bearish { color: var(--red); font-weight: 600; }
+
+  .post-signals { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .signal-tag {
+    padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .signal-tag.engagement { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); }
+  .signal-tag.ticker { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+  .signal-tag.dramatic { background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }
+  .signal-tag.policy { background: rgba(234,179,8,0.15); color: #fbbf24; border: 1px solid rgba(234,179,8,0.3); }
+  .signal-tag.short { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+  .signal-tag.bullish { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+
+  .post-metrics {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 8px; padding: 10px; background: rgba(0,0,0,0.3);
+    border-radius: 6px; margin-bottom: 12px;
+  }
+  .metric-item { text-align: center; }
+  .metric-value { font-size: 14px; font-weight: 700; }
+  .metric-value.spike { color: var(--red); }
+  .metric-value.above { color: var(--orange); }
+  .metric-value.normal { color: var(--text-primary); }
+  .metric-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1px; }
+  .metric-vs { font-size: 9px; color: var(--text-muted); }
+  .metric-vs.up { color: var(--red); }
+
+  .impact-bar-wrap { display: flex; align-items: center; gap: 10px; }
+  .impact-label { font-size: 11px; color: var(--text-muted); font-weight: 600; width: 80px; flex-shrink: 0; }
+  .impact-bar {
+    flex: 1; height: 6px; background: rgba(255,255,255,0.08);
+    border-radius: 3px; overflow: hidden;
+  }
+  .impact-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+  .impact-fill.critical { background: linear-gradient(90deg, #ef4444, #f97316); }
+  .impact-fill.high { background: linear-gradient(90deg, #f97316, #eab308); }
+  .impact-fill.medium { background: linear-gradient(90deg, #eab308, #22c55e); }
+  .impact-fill.low { background: #22c55e; }
+  .impact-score {
+    font-size: 16px; font-weight: 800; width: 36px; text-align: right; flex-shrink: 0;
+  }
+  .impact-score.critical { color: var(--red); }
+  .impact-score.high { color: var(--orange); }
+  .impact-score.medium { color: var(--yellow); }
+  .impact-score.low { color: var(--green); }
+
+  /* ── RIGHT PANEL ── */
+  .right-panel {
+    background: var(--bg-sidebar);
+    border-left: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 0;
+  }
+  .right-panel::-webkit-scrollbar { width: 4px; }
+  .right-panel::-webkit-scrollbar-track { background: transparent; }
+  .right-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .panel-section { border-bottom: 1px solid var(--border); padding: 16px; }
+  .panel-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
+
+  /* Score breakdown */
+  .score-breakdown { display: flex; flex-direction: column; gap: 8px; }
+  .score-row { display: flex; align-items: center; gap: 8px; }
+  .score-row-label { font-size: 11px; color: var(--text-secondary); width: 110px; flex-shrink: 0; }
+  .mini-bar { flex: 1; height: 5px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+  .mini-fill { height: 100%; border-radius: 2px; }
+  .score-row-val { font-size: 11px; font-weight: 700; width: 24px; text-align: right; }
+
+  /* Trending tickers */
+  .ticker-list { display: flex; flex-direction: column; gap: 6px; }
+  .ticker-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px; background: rgba(0,0,0,0.2); border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .ticker-symbol { font-size: 13px; font-weight: 800; color: #60a5fa; width: 50px; }
+  .ticker-name { font-size: 11px; color: var(--text-muted); flex: 1; }
+  .ticker-count { font-size: 11px; font-weight: 700; color: var(--text-secondary); }
+  .ticker-sentiment {
+    font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px;
+  }
+  .ticker-sentiment.bull { background: rgba(34,197,94,0.15); color: var(--green); }
+  .ticker-sentiment.bear { background: rgba(239,68,68,0.15); color: var(--red); }
+  .ticker-sentiment.mixed { background: rgba(234,179,8,0.15); color: var(--yellow); }
+
+  /* Top authors */
+  .author-stat-row {
+    display: flex; align-items: center; gap: 8px; padding: 6px 0;
+  }
+  .author-mini-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+  .author-mini-info { flex: 1; }
+  .author-mini-name { font-size: 11px; font-weight: 600; }
+  .author-mini-posts { font-size: 10px; color: var(--text-muted); }
+  .author-mini-score { font-size: 13px; font-weight: 800; color: var(--orange); }
+
+  /* Scoring methodology */
+  .method-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .method-item:last-child { border-bottom: none; }
+  .method-icon { font-size: 16px; flex-shrink: 0; padding-top: 1px; }
+  .method-title { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+  .method-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+  .method-weight { font-size: 10px; font-weight: 700; color: var(--accent-blue); margin-top: 2px; }
+
+  /* No results */
+  .no-results {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 60px 20px; color: var(--text-muted); text-align: center; gap: 12px;
+  }
+  .no-results-icon { font-size: 40px; opacity: 0.4; }
+
+  /* Responsive tweaks */
+  @media (max-width: 1200px) {
+    .main-layout { grid-template-columns: 220px 1fr; }
+    .right-panel { display: none; }
+  }
+  @media (max-width: 768px) {
+    .main-layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .topbar-stats { display: none; }
+  }
+
+  /* Tooltip */
+  [data-tooltip] { position: relative; }
+  [data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: #1e2d4a; color: var(--text-primary);
+    padding: 4px 8px; border-radius: 4px; font-size: 11px; white-space: nowrap;
+    pointer-events: none; z-index: 999;
+  }
+
+  /* Scroll to top btn */
+  .scroll-top {
+    position: fixed; bottom: 20px; right: 20px;
+    background: var(--accent-blue); color: white;
+    width: 36px; height: 36px; border-radius: 50%; border: none;
+    cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(59,130,246,0.4); transition: all 0.2s; z-index: 200;
+    opacity: 0; pointer-events: none;
+  }
+  .scroll-top.visible { opacity: 1; pointer-events: all; }
+  .scroll-top:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(59,130,246,0.5); }
+
+  /* API Key Notice */
+  .api-notice {
+    background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 8px; padding: 12px 16px; margin: 12px; font-size: 12px;
+    color: var(--text-secondary); display: flex; gap: 10px; align-items: flex-start;
+  }
+  .api-notice-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .api-notice a { color: var(--accent-blue); text-decoration: none; font-weight: 600; }
+  .api-notice a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo">
+      <div class="logo-icon">📡</div>
+      <div class="logo-text">Market<span>Sentinel</span></div>
+    </div>
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      DEMO MODE
+    </div>
+  </div>
+  <div class="topbar-stats">
+    <div class="stat-item">
+      <div class="stat-value alert" id="stat-critical">3</div>
+      <div class="stat-label">Critical Alerts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value warn" id="stat-high">7</div>
+      <div class="stat-label">High Impact</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="stat-monitored">24</div>
+      <div class="stat-label">Accounts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="stat-posts">142</div>
+      <div class="stat-label">Posts Today</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="last-update" id="last-update">Last updated: just now</div>
+    <button class="refresh-btn" onclick="refreshFeed()">⟳ Refresh</button>
+  </div>
+</div>
+
+<!-- ALERT BANNER -->
+<div class="alert-banner" id="alert-banner">
+  <div class="alert-icon">🚨</div>
+  <div class="alert-text">
+    <strong>CRITICAL ALERT:</strong> Bill Ackman just posted about <strong>FNMA / FMCC</strong> — Impact Score 96. Claims both stocks are "massively underpriced" with potential <strong>10x upside</strong>. Post has 8.4M views — 47× his average. <em>Watch for pre-market movement.</em>
+  </div>
+  <div class="alert-close" onclick="document.getElementById('alert-banner').classList.add('hidden')">×</div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- LEFT SIDEBAR: WATCHLIST -->
+  <div class="sidebar">
+    <div class="sidebar-section-title">
+      Hedge Fund Managers <span id="hf-count">9</span>
+    </div>
+    <!-- People populated by JS -->
+    <div id="watchlist-hf"></div>
+
+    <div class="sidebar-section-title">
+      Short Sellers <span id="ss-count">5</span>
+    </div>
+    <div id="watchlist-ss"></div>
+
+    <div class="sidebar-section-title">
+      Macro / Policy <span id="mp-count">6</span>
+    </div>
+    <div id="watchlist-mp"></div>
+
+    <div class="sidebar-section-title">
+      Market Commentators <span id="mc-count">4</span>
+    </div>
+    <div id="watchlist-mc"></div>
+  </div>
+
+  <!-- MAIN FEED -->
+  <div class="feed-area" id="feed-area">
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <span class="filter-label">Sort:</span>
+      <button class="filter-chip active" id="sort-latest" onclick="setSort('latest', this)">🕐 Latest First</button>
+      <button class="filter-chip" id="sort-score" onclick="setSort('score', this)">🔥 Highest Score</button>
+      <div class="filter-divider"></div>
+      <span class="filter-label">Filter:</span>
+      <button class="filter-chip active" id="filter-all" onclick="setFilter('all', this)">All</button>
+      <button class="filter-chip red" onclick="setFilter('critical', this)">🔴 Critical (80+)</button>
+      <button class="filter-chip orange" onclick="setFilter('high', this)">🟠 High (60+)</button>
+      <div class="filter-divider"></div>
+      <span class="filter-label">Signal:</span>
+      <button class="filter-chip engagement" onclick="setFilter('engagement', this)">📈 Engagement Spike</button>
+      <button class="filter-chip ticker" onclick="setFilter('ticker', this)">💹 Ticker Mention</button>
+      <button class="filter-chip dramatic" onclick="setFilter('dramatic', this)">⚡ Dramatic Claim</button>
+      <button class="filter-chip policy" onclick="setFilter('policy', this)">🏛️ Policy Signal</button>
+      <button class="filter-chip" onclick="setFilter('short', this)">🔻 Short/Bear</button>
+    </div>
+
+    <!-- Live data status bar -->
+    <div id="live-data-bar" class="api-notice" style="background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.25);display:none;">
+      <div class="api-notice-icon">✅</div>
+      <div style="flex:1;">
+        <strong style="color:#4ade80;">Live Scan Data Loaded.</strong>
+        Showing <span id="live-post-count">0</span> posts from the latest hourly scan.
+        Last scan: <span id="live-scan-time">—</span>
+        <span id="live-summary" style="color:var(--text-muted);margin-left:8px;"></span>
+      </div>
+      <button onclick="loadDemoData()" style="background:transparent;border:1px solid rgba(34,197,94,0.3);color:#4ade80;padding:3px 10px;border-radius:4px;cursor:pointer;font-size:11px;">View Demo Instead</button>
+    </div>
+
+    <!-- Demo mode notice -->
+    <div id="demo-notice" class="api-notice">
+      <div class="api-notice-icon">ℹ️</div>
+      <div style="flex:1;">
+        <strong>Demo Mode — Sample Data Displayed.</strong>
+        The hourly scan runs automatically and saves results to <code>data/live_data.js</code>.
+        Refresh this page after each scan to see real results — or load a results file manually below.
+      </div>
+      <label style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#60a5fa;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;white-space:nowrap;flex-shrink:0;">
+        📂 Load Results File
+        <input type="file" accept=".json,.js" style="display:none;" onchange="loadFileManually(this)">
+      </label>
+    </div>
+
+    <div class="feed-list" id="feed-list"></div>
+    <div class="no-results hidden" id="no-results">
+      <div class="no-results-icon">🔍</div>
+      <div><strong>No posts match this filter</strong></div>
+      <div style="font-size:12px;">Try a different filter or refresh the feed</div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    <!-- Impact Scoring Breakdown -->
+    <div class="panel-section">
+      <div class="panel-title">📊 Scoring Methodology</div>
+      <div class="method-item">
+        <div class="method-icon">📈</div>
+        <div>
+          <div class="method-title">Engagement Spike</div>
+          <div class="method-desc">Compares views, reposts, likes to the author's rolling 30-day average. A 10× spike = high signal.</div>
+          <div class="method-weight">Weight: 30 pts max</div>
+        </div>
+      </div>
+      <div class="method-item">
+        <div class="method-icon">💹</div>
+        <div>
+          <div class="method-title">Ticker / Asset Mention</div>
+          <div class="method-desc">Detects specific stock tickers, crypto, ETFs. More tickers with directional language = higher score.</div>
+          <div class="method-weight">Weight: 25 pts max</div>
+        </div>
+      </div>
+      <div class="method-item">
+        <div class="method-icon">⚡</div>
+        <div>
+          <div class="method-title">Dramatic Claim</div>
+          <div class="method-desc">NLP detects bold claims: "10x", "massively underpriced", "short", "fraud", "bankruptcy", "buy now".</div>
+          <div class="method-weight">Weight: 25 pts max</div>
+        </div>
+      </div>
+      <div class="method-item">
+        <div class="method-icon">🏛️</div>
+        <div>
+          <div class="method-title">Policy / Regulatory Signal</div>
+          <div class="method-desc">Flags tariff, sanctions, Fed, rate, executive order mentions from political/regulatory figures.</div>
+          <div class="method-weight">Weight: 20 pts max</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trending Tickers -->
+    <div class="panel-section">
+      <div class="panel-title">🔥 Trending Tickers Mentioned</div>
+      <div class="ticker-list" id="ticker-list"></div>
+    </div>
+
+    <!-- Top Active Authors Today -->
+    <div class="panel-section">
+      <div class="panel-title">👤 Most Active Today</div>
+      <div id="top-authors"></div>
+    </div>
+
+    <!-- Score Legend -->
+    <div class="panel-section">
+      <div class="panel-title">📋 Score Legend</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:11px;">
+        <div style="display:flex;align-items:center;gap:8px;"><span style="color:#ef4444;font-weight:800;">80–100</span> <span style="color:var(--text-secondary)">Critical — likely market-moving event</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="color:#f97316;font-weight:800;">60–79</span> <span style="color:var(--text-secondary)">High — significant attention, watch closely</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="color:#eab308;font-weight:800;">40–59</span> <span style="color:var(--text-secondary)">Medium — notable, directional signal</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="color:#22c55e;font-weight:800;">0–39</span> <span style="color:var(--text-secondary)">Low — informational, monitor for follow-up</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<button class="scroll-top" id="scroll-top" onclick="document.getElementById('feed-area').scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ════════════════════════════════════════
+//  WATCHLIST DATA
+// ════════════════════════════════════════
+const WATCHLIST = {
+  "Hedge Fund Managers": [
+    { id: "ackman",      name: "Bill Ackman",           role: "Pershing Square Capital",      handle: "@BillAckman",    platform: "X",         avatar: "BA", color: "#3b82f6", posts: 3, hasAlert: true  },
+    { id: "burry",       name: "Michael Burry",          role: "Scion Asset Management",       handle: "@michaeljburry", platform: "X",         avatar: "MB", color: "#ef4444", posts: 1, hasAlert: false },
+    { id: "dalio",       name: "Ray Dalio",              role: "Bridgewater Associates",       handle: "@RayDalio",      platform: "X",         avatar: "RD", color: "#8b5cf6", posts: 2, hasAlert: false },
+    { id: "druckenmiller",name:"Stan Druckenmiller",      role: "Duquesne Family Office",       handle: "@StanleyDruck",  platform: "X",         avatar: "SD", color: "#06b6d4", posts: 0, hasAlert: false },
+    { id: "einhorn",     name: "David Einhorn",          role: "Greenlight Capital",           handle: "@GreenLightCap", platform: "X",         avatar: "DE", color: "#22c55e", posts: 1, hasAlert: false },
+    { id: "loeb",        name: "Dan Loeb",               role: "Third Point LLC",              handle: "@DanLoeb",       platform: "X",         avatar: "DL", color: "#f97316", posts: 1, hasAlert: false },
+    { id: "gundlach",    name: "Jeffrey Gundlach",       role: "DoubleLine Capital",           handle: "@TruthGundlach", platform: "X",         avatar: "JG", color: "#a855f7", posts: 2, hasAlert: false },
+    { id: "icahn",       name: "Carl Icahn",             role: "Icahn Enterprises",            handle: "@Carl_C_Icahn",  platform: "X",         avatar: "CI", color: "#eab308", posts: 1, hasAlert: false },
+    { id: "saylor",      name: "Michael Saylor",         role: "MicroStrategy / Bitcoin",      handle: "@saylor",        platform: "X",         avatar: "MS", color: "#f59e0b", posts: 4, hasAlert: false },
+  ],
+  "Short Sellers": [
+    { id: "muddywaters",  name: "Muddy Waters",          role: "Short Seller (Carson Block)",  handle: "@muddywatersre", platform: "X",         avatar: "MW", color: "#ef4444", posts: 2, hasAlert: true  },
+    { id: "hindenburg",   name: "Hindenburg Research",   role: "Activist Short Seller",        handle: "@HindenburgRes", platform: "X",         avatar: "HR", color: "#ef4444", posts: 0, hasAlert: false },
+    { id: "citron",       name: "Citron Research",       role: "Short Seller (Andrew Left)",   handle: "@CitronResearch",platform: "X",         avatar: "CR", color: "#ef4444", posts: 1, hasAlert: false },
+    { id: "spruce",       name: "Spruce Point Capital",  role: "Activist Short Seller",        handle: "@SprucePointCap",platform: "X",         avatar: "SP", color: "#ef4444", posts: 0, hasAlert: false },
+    { id: "gotham",       name: "Gotham City Research",  role: "Short Seller",                 handle: "@GothamCityRes", platform: "X",         avatar: "GC", color: "#ef4444", posts: 0, hasAlert: false },
+  ],
+  "Macro / Policy": [
+    { id: "trump",        name: "Donald Trump",          role: "US President (47th)",          handle: "@realDonaldTrump",platform:"TRUTH",     avatar: "DT", color: "#ef4444", posts: 5, hasAlert: true  },
+    { id: "elerianm",     name: "Mohamed El-Erian",      role: "Allianz Chief Econ. Advisor",  handle: "@elerianm",      platform: "X",         avatar: "ME", color: "#06b6d4", posts: 3, hasAlert: false },
+    { id: "roubini",      name: "Nouriel Roubini",       role: "Atlas Capital / 'Dr. Doom'",   handle: "@Nouriel",       platform: "X",         avatar: "NR", color: "#6366f1", posts: 2, hasAlert: false },
+    { id: "summers",      name: "Larry Summers",         role: "Fmr. US Treasury Secretary",   handle: "@LHSummers",     platform: "X",         avatar: "LS", color: "#8b5cf6", posts: 1, hasAlert: false },
+    { id: "bessent",      name: "Scott Bessent",         role: "US Treasury Secretary",        handle: "@ScottBessent",  platform: "X",         avatar: "SB", color: "#3b82f6", posts: 2, hasAlert: false },
+    { id: "musk",         name: "Elon Musk",             role: "Tesla / SpaceX / xAI / DOGE",  handle: "@elonmusk",      platform: "X",         avatar: "EM", color: "#06b6d4", posts: 8, hasAlert: false },
+  ],
+  "Market Commentators": [
+    { id: "elerian2",     name: "David Rosenberg",       role: "Rosenberg Research",           handle: "@EconguyRosie",  platform: "X",         avatar: "DR", color: "#64748b", posts: 2, hasAlert: false },
+    { id: "danives",      name: "Dan Ives",              role: "Wedbush Tech Analyst",         handle: "@DanIvesWedbush",platform: "X",         avatar: "DI", color: "#22c55e", posts: 3, hasAlert: false },
+    { id: "cramer",       name: "Jim Cramer",            role: "CNBC Mad Money (contrarian!)", handle: "@jimcramer",     platform: "X",         avatar: "JC", color: "#ef4444", posts: 6, hasAlert: false },
+    { id: "ackmanwatch",  name: "Kuppy (Harris Kupperman)",role:"Praetorian Capital",          handle: "@hkuppy",        platform: "X",         avatar: "HK", color: "#a855f7", posts: 1, hasAlert: false },
+  ]
+};
+
+// ════════════════════════════════════════
+//  SAMPLE POST DATA (replaces live feed in demo)
+// ════════════════════════════════════════
+const SAMPLE_POSTS = [
+  {
+    id: 1,
+    author: "Bill Ackman",
+    authorId: "ackman",
+    role: "Pershing Square Capital",
+    avatar: "BA",
+    avatarColor: "#3b82f6",
+    platform: "X",
+    time: "14 min ago",
+    score: 96,
+    scoreClass: "critical",
+    content: "I've spent the last several weeks studying <span class='ticker-tag'>FNMA</span> and <span class='ticker-tag'>FMCC</span> (Fannie Mae & Freddie Mac) in detail. My conclusion: these two companies are <span class='highlight'>massively underpriced</span>. Under a conservatorship exit scenario, which I believe is now highly probable given the current administration's priorities, both stocks could realistically be worth <span class='bullish'>10x their current price</span>. The implied equity value being assigned to these entities is essentially zero — yet the mortgage guarantee business alone is worth hundreds of billions. This is one of the most compelling risk/reward setups I have seen in my career.",
+    signals: ["engagement", "ticker", "dramatic", "bullish"],
+    signalLabels: ["📈 47× Avg Engagement", "💹 FNMA / FMCC", "⚡ 10× Upside Claim", "🟢 Bullish"],
+    metrics: {
+      views: { value: "8.4M", label: "Views", class: "spike", vs: "47× avg" },
+      reposts: { value: "41.2K", label: "Reposts", class: "spike", vs: "52× avg" },
+      likes: { value: "89.4K", label: "Likes", class: "spike", vs: "38× avg" },
+      replies: { value: "12.1K", label: "Replies", class: "above", vs: "29× avg" }
+    },
+    impactBreakdown: {
+      engagement: 30, ticker: 22, dramatic: 25, policy: 19
+    },
+    tickers: ["FNMA", "FMCC"]
+  },
+  {
+    id: 2,
+    author: "Donald Trump",
+    authorId: "trump",
+    role: "US President (47th)",
+    avatar: "DT",
+    avatarColor: "#ef4444",
+    platform: "TRUTH",
+    time: "38 min ago",
+    score: 89,
+    scoreClass: "critical",
+    content: "We are looking very seriously at a 90-day pause on <span class='highlight'>tariffs</span> for all countries EXCEPT China. Will make an announcement soon. This will be GREAT for our markets and GREAT for America. China has been the bad actor here — we will not let that stand. <span class='ticker-tag'>$SPY</span> <span class='ticker-tag'>$QQQ</span> should like this very much!",
+    signals: ["policy", "dramatic", "engagement"],
+    signalLabels: ["🏛️ Tariff Policy Signal", "⚡ Market Direction Claim", "📈 14× Avg Engagement"],
+    metrics: {
+      views: { value: "22.1M", label: "Views", class: "spike", vs: "14× avg" },
+      reposts: { value: "98.3K", label: "Reposts", class: "spike", vs: "18× avg" },
+      likes: { value: "210K", label: "Likes", class: "spike", vs: "12× avg" },
+      replies: { value: "44.2K", label: "Replies", class: "spike", vs: "16× avg" }
+    },
+    impactBreakdown: {
+      engagement: 24, ticker: 12, dramatic: 18, policy: 20
+    },
+    tickers: ["SPY", "QQQ"]
+  },
+  {
+    id: 3,
+    author: "Muddy Waters Research",
+    authorId: "muddywaters",
+    role: "Short Seller (Carson Block)",
+    avatar: "MW",
+    avatarColor: "#ef4444",
+    platform: "X",
+    time: "1 hr 12 min ago",
+    score: 84,
+    scoreClass: "critical",
+    content: "We are <span class='bearish'>short</span> <span class='ticker-tag'>SMCI</span> (Super Micro Computer). New report dropping in 2 hours. We have identified significant <span class='bearish'>accounting irregularities</span> and undisclosed related-party transactions that materially overstate revenues. Our analysis suggests the stock should trade at a <span class='bearish'>70–80% discount</span> to current levels. This is not a drill. Link to follow.",
+    signals: ["short", "ticker", "dramatic", "engagement"],
+    signalLabels: ["🔻 Active Short Position", "💹 SMCI", "⚡ 70-80% Downside Claim", "📈 31× Avg Engagement"],
+    metrics: {
+      views: { value: "3.1M", label: "Views", class: "spike", vs: "31× avg" },
+      reposts: { value: "18.7K", label: "Reposts", class: "spike", vs: "41× avg" },
+      likes: { value: "22.4K", label: "Likes", class: "spike", vs: "28× avg" },
+      replies: { value: "5.8K", label: "Replies", class: "spike", vs: "34× avg" }
+    },
+    impactBreakdown: {
+      engagement: 29, ticker: 23, dramatic: 25, policy: 7
+    },
+    tickers: ["SMCI"]
+  },
+  {
+    id: 4,
+    author: "Michael Burry",
+    authorId: "burry",
+    role: "Scion Asset Management",
+    avatar: "MB",
+    avatarColor: "#ef4444",
+    platform: "X",
+    time: "2 hrs 5 min ago",
+    score: 71,
+    scoreClass: "high",
+    content: "🐻 Serious people should look at what is happening with regional bank exposure to commercial real estate. <span class='ticker-tag'>KRE</span> is the canary. The wave hasn't fully hit yet. <span class='bearish'>Reminds me of 2007</span>. Not financial advice.",
+    signals: ["ticker", "dramatic", "engagement"],
+    signalLabels: ["💹 KRE", "⚡ 2007 Comparison", "📈 19× Avg Engagement"],
+    metrics: {
+      views: { value: "4.8M", label: "Views", class: "spike", vs: "19× avg" },
+      reposts: { value: "24.1K", label: "Reposts", class: "spike", vs: "24× avg" },
+      likes: { value: "51.2K", label: "Likes", class: "spike", vs: "21× avg" },
+      replies: { value: "7.4K", label: "Replies", class: "above", vs: "17× avg" }
+    },
+    impactBreakdown: {
+      engagement: 26, ticker: 20, dramatic: 18, policy: 7
+    },
+    tickers: ["KRE"]
+  },
+  {
+    id: 5,
+    author: "Mohamed El-Erian",
+    authorId: "elerianm",
+    role: "Allianz Chief Economist",
+    avatar: "ME",
+    avatarColor: "#06b6d4",
+    platform: "X",
+    time: "2 hrs 51 min ago",
+    score: 62,
+    scoreClass: "high",
+    content: "Today's CPI print is a <span class='highlight'>wake-up call</span> for markets pricing in aggressive Fed cuts. Core services inflation is not cooperating. I continue to think the Fed will hold rates higher for longer than the futures market implies — <span class='bearish'>this is bearish for duration</span> (<span class='ticker-tag'>TLT</span>) and particularly for growth/tech names with long-duration earnings profiles (<span class='ticker-tag'>QQQ</span>). The soft landing narrative is still alive but increasingly fragile.",
+    signals: ["policy", "ticker", "dramatic"],
+    signalLabels: ["🏛️ Fed Policy Signal", "💹 TLT / QQQ", "⚡ Bearish Duration Claim"],
+    metrics: {
+      views: { value: "1.2M", label: "Views", class: "above", vs: "8× avg" },
+      reposts: { value: "6.8K", label: "Reposts", class: "above", vs: "9× avg" },
+      likes: { value: "18.1K", label: "Likes", class: "above", vs: "7× avg" },
+      replies: { value: "2.1K", label: "Replies", class: "above", vs: "6× avg" }
+    },
+    impactBreakdown: {
+      engagement: 18, ticker: 20, dramatic: 12, policy: 12
+    },
+    tickers: ["TLT", "QQQ"]
+  },
+  {
+    id: 6,
+    author: "Jeffrey Gundlach",
+    authorId: "gundlach",
+    role: "DoubleLine Capital",
+    avatar: "JG",
+    avatarColor: "#a855f7",
+    platform: "X",
+    time: "3 hrs 30 min ago",
+    score: 58,
+    scoreClass: "medium",
+    content: "The US dollar is telling you something that equity bulls don't want to hear. DXY breaking key support while gold hits ATH is NOT a risk-on signal. This is a <span class='bearish'>loss of confidence in USD-denominated assets</span>. Watch <span class='ticker-tag'>GLD</span>, <span class='ticker-tag'>SLV</span> and international equities (<span class='ticker-tag'>EWZ</span>, <span class='ticker-tag'>EFA</span>). Rotate accordingly.",
+    signals: ["ticker", "policy", "dramatic"],
+    signalLabels: ["💹 GLD / SLV / EWZ / EFA", "🏛️ USD/Macro Signal", "⚡ USD Confidence Claim"],
+    metrics: {
+      views: { value: "820K", label: "Views", class: "above", vs: "5× avg" },
+      reposts: { value: "4.2K", label: "Reposts", class: "above", vs: "6× avg" },
+      likes: { value: "11.4K", label: "Likes", class: "above", vs: "5× avg" },
+      replies: { value: "1.4K", label: "Replies", class: "normal", vs: "4× avg" }
+    },
+    impactBreakdown: {
+      engagement: 14, ticker: 22, dramatic: 12, policy: 10
+    },
+    tickers: ["GLD", "SLV", "EWZ", "EFA"]
+  },
+  {
+    id: 7,
+    author: "Ray Dalio",
+    authorId: "dalio",
+    role: "Bridgewater Associates",
+    avatar: "RD",
+    avatarColor: "#8b5cf6",
+    platform: "X",
+    time: "4 hrs 11 min ago",
+    score: 52,
+    scoreClass: "medium",
+    content: "We are at a critical juncture in the <span class='highlight'>debt supercycle</span>. The next 5 years will see either a managed restructuring of global debt or a disorderly deleveraging. In either case, I favour <span class='bullish'>hard assets</span>: <span class='ticker-tag'>GLD</span>, infrastructure, and diversified international exposure over US Treasuries (<span class='bearish'>underweight</span> <span class='ticker-tag'>TLT</span>). Chapter from my new book linked below.",
+    signals: ["ticker", "dramatic", "policy"],
+    signalLabels: ["💹 GLD / TLT", "⚡ Debt Supercycle Warning", "🏛️ Macro Outlook"],
+    metrics: {
+      views: { value: "2.1M", label: "Views", class: "above", vs: "6× avg" },
+      reposts: { value: "11.3K", label: "Reposts", class: "above", vs: "7× avg" },
+      likes: { value: "28.4K", label: "Likes", class: "above", vs: "5× avg" },
+      replies: { value: "3.2K", label: "Replies", class: "above", vs: "5× avg" }
+    },
+    impactBreakdown: {
+      engagement: 15, ticker: 18, dramatic: 12, policy: 7
+    },
+    tickers: ["GLD", "TLT"]
+  },
+  {
+    id: 8,
+    author: "Citron Research",
+    authorId: "citron",
+    role: "Short Seller (Andrew Left)",
+    avatar: "CR",
+    avatarColor: "#ef4444",
+    platform: "X",
+    time: "5 hrs 44 min ago",
+    score: 47,
+    scoreClass: "medium",
+    content: "We maintain our <span class='bearish'>short thesis on</span> <span class='ticker-tag'>NVDA</span>. While the AI story is real, the valuation has disconnected from any reasonable scenario analysis. At 35× forward sales, you need flawless execution forever. One miss and this stock sees <span class='bearish'>$80 before $200</span>. Trim into strength.",
+    signals: ["short", "ticker", "dramatic"],
+    signalLabels: ["🔻 Short Position", "💹 NVDA", "⚡ Price Target Claim"],
+    metrics: {
+      views: { value: "490K", label: "Views", class: "above", vs: "4× avg" },
+      reposts: { value: "2.8K", label: "Reposts", class: "above", vs: "5× avg" },
+      likes: { value: "5.1K", label: "Likes", class: "above", vs: "4× avg" },
+      replies: { value: "1.1K", label: "Replies", class: "above", vs: "4× avg" }
+    },
+    impactBreakdown: {
+      engagement: 12, ticker: 18, dramatic: 14, policy: 3
+    },
+    tickers: ["NVDA"]
+  },
+  {
+    id: 9,
+    author: "Dan Loeb",
+    authorId: "loeb",
+    role: "Third Point LLC",
+    avatar: "DL",
+    avatarColor: "#f97316",
+    platform: "X",
+    time: "6 hrs 20 min ago",
+    score: 38,
+    scoreClass: "low",
+    content: "Initiated a new position in <span class='ticker-tag'>META</span>. Believe Zuckerberg has finally found the right balance between monetisation and user growth. Llama 3 / AI integration across WhatsApp and IG is still dramatically underappreciated by the market. <span class='bullish'>Long term hold</span>.",
+    signals: ["ticker", "dramatic"],
+    signalLabels: ["💹 META", "🟢 Bullish / New Position"],
+    metrics: {
+      views: { value: "310K", label: "Views", class: "normal", vs: "2× avg" },
+      reposts: { value: "1.4K", label: "Reposts", class: "normal", vs: "2× avg" },
+      likes: { value: "4.8K", label: "Likes", class: "normal", vs: "3× avg" },
+      replies: { value: "620", label: "Replies", class: "normal", vs: "2× avg" }
+    },
+    impactBreakdown: {
+      engagement: 8, ticker: 18, dramatic: 10, policy: 2
+    },
+    tickers: ["META"]
+  }
+];
+
+// ════════════════════════════════════════
+//  TRENDING TICKERS
+// ════════════════════════════════════════
+const TRENDING_TICKERS = [
+  { symbol: "FNMA", name: "Fannie Mae", count: 3, sentiment: "bull", sentimentLabel: "BULLISH" },
+  { symbol: "FMCC", name: "Freddie Mac", count: 3, sentiment: "bull", sentimentLabel: "BULLISH" },
+  { symbol: "SMCI", name: "Super Micro Computer", count: 2, sentiment: "bear", sentimentLabel: "BEARISH" },
+  { symbol: "GLD", name: "SPDR Gold ETF", count: 4, sentiment: "bull", sentimentLabel: "BULLISH" },
+  { symbol: "TLT", name: "iShares 20Y Treasury", count: 3, sentiment: "bear", sentimentLabel: "BEARISH" },
+  { symbol: "QQQ", name: "Nasdaq-100 ETF", count: 3, sentiment: "mixed", sentimentLabel: "MIXED" },
+  { symbol: "NVDA", name: "Nvidia Corp", count: 2, sentiment: "bear", sentimentLabel: "BEARISH" },
+];
+
+// ════════════════════════════════════════
+//  TOP AUTHORS
+// ════════════════════════════════════════
+const TOP_AUTHORS = [
+  { name: "Elon Musk",        role: "8 posts today",  avatar: "EM", color: "#06b6d4", score: 44 },
+  { name: "Jim Cramer",       role: "6 posts today",  avatar: "JC", color: "#ef4444", score: 31 },
+  { name: "Donald Trump",     role: "5 posts today",  avatar: "DT", color: "#ef4444", score: 89 },
+  { name: "Michael Saylor",   role: "4 posts today",  avatar: "MS", color: "#f59e0b", score: 42 },
+];
+
+// ════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════
+let currentFilter = 'all';
+let currentSort = 'latest';   // 'latest' | 'score'
+let allPosts = [...SAMPLE_POSTS];
+
+// Assign a timeOrder index so latest post = lowest number
+allPosts.forEach((p, i) => { p.timeOrder = i; });
+
+// ════════════════════════════════════════
+//  RENDER FUNCTIONS
+// ════════════════════════════════════════
+function renderWatchlist() {
+  const sections = {
+    "Hedge Fund Managers": { id: "watchlist-hf" },
+    "Short Sellers":       { id: "watchlist-ss" },
+    "Macro / Policy":      { id: "watchlist-mp" },
+    "Market Commentators": { id: "watchlist-mc" },
+  };
+  Object.entries(WATCHLIST).forEach(([section, people]) => {
+    const container = document.getElementById(sections[section].id);
+    if (!container) return;
+    container.innerHTML = people.map(p => `
+      <div class="person-card ${p.hasAlert ? 'has-alert' : ''}" onclick="filterByPerson('${p.id}', this)">
+        <div class="person-avatar" style="background:${p.color}22;color:${p.color};">
+          ${p.avatar}
+          ${p.hasAlert ? '<div class="alert-dot"></div>' : ''}
+        </div>
+        <div class="person-info">
+          <div class="person-name">${p.name}</div>
+          <div class="person-role">${p.role}</div>
+        </div>
+        <div class="person-meta">
+          <div class="person-count">${p.posts > 0 ? p.posts : '—'}</div>
+          <div class="person-platform">${p.platform}</div>
+        </div>
+      </div>
+    `).join('');
+  });
+}
+
+function renderTickers() {
+  const container = document.getElementById('ticker-list');
+  container.innerHTML = TRENDING_TICKERS.map(t => `
+    <div class="ticker-row">
+      <div class="ticker-symbol">${t.symbol}</div>
+      <div class="ticker-name">${t.name}</div>
+      <div class="ticker-count">${t.count}×</div>
+      <div class="ticker-sentiment ${t.sentiment}">${t.sentimentLabel}</div>
+    </div>
+  `).join('');
+}
+
+function renderTopAuthors() {
+  const container = document.getElementById('top-authors');
+  container.innerHTML = TOP_AUTHORS.map(a => `
+    <div class="author-stat-row">
+      <div class="author-mini-avatar" style="background:${a.color}22;color:${a.color};">${a.avatar}</div>
+      <div class="author-mini-info">
+        <div class="author-mini-name">${a.name}</div>
+        <div class="author-mini-posts">${a.role}</div>
+      </div>
+      <div class="author-mini-score">${a.score}</div>
+    </div>
+  `).join('');
+}
+
+function getImpactFillClass(score) {
+  if (score >= 80) return 'critical';
+  if (score >= 60) return 'high';
+  if (score >= 40) return 'medium';
+  return 'low';
+}
+
+function renderPost(post) {
+  const fillClass = getImpactFillClass(post.score);
+  const signalTagHTML = post.signals.map((s, i) => {
+    const tagClass = s === 'bullish' ? 'bullish' : s;
+    return `<span class="signal-tag ${tagClass}">${post.signalLabels[i]}</span>`;
+  }).join('');
+
+  const breakdown = post.impactBreakdown;
+  const total = breakdown.engagement + breakdown.ticker + breakdown.dramatic + breakdown.policy;
+
+  return `
+  <div class="post-card score-${post.scoreClass}" data-id="${post.id}" data-score="${post.score}" data-signals="${post.signals.join(',')}" onclick="expandPost(${post.id})">
+    <div class="post-header">
+      <div class="post-avatar" style="background:${post.avatarColor}22;color:${post.avatarColor};">${post.avatar}</div>
+      <div class="post-author-info">
+        <div class="post-author-name">${post.author}</div>
+        <div class="post-author-role">${post.role}</div>
+      </div>
+      <div class="post-meta">
+        <div class="platform-badge ${post.platform.toLowerCase()}">${post.platform === 'X' ? '𝕏 X' : '🇺🇸 TRUTH'}</div>
+        <div class="post-time">${post.time}</div>
+      </div>
+    </div>
+
+    <div class="post-content">${post.content}</div>
+
+    <div class="post-signals">${signalTagHTML}</div>
+
+    <div class="post-metrics">
+      ${Object.entries(post.metrics).map(([k, m]) => `
+        <div class="metric-item">
+          <div class="metric-value ${m.class}">${m.value}</div>
+          <div class="metric-label">${m.label}</div>
+          <div class="metric-vs up">${m.vs}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="impact-bar-wrap">
+      <div class="impact-label">Impact Score</div>
+      <div class="impact-bar">
+        <div class="impact-fill ${fillClass}" style="width:${post.score}%"></div>
+      </div>
+      <div class="impact-score ${fillClass}">${post.score}</div>
+    </div>
+
+    <div style="margin-top:10px;display:flex;flex-direction:column;gap:4px;">
+      <div class="score-row">
+        <div class="score-row-label" style="font-size:10px;">Engagement Spike</div>
+        <div class="mini-bar"><div class="mini-fill" style="width:${(breakdown.engagement/30)*100}%;background:#a855f7;"></div></div>
+        <div class="score-row-val" style="font-size:10px;color:#c084fc;">${breakdown.engagement}</div>
+      </div>
+      <div class="score-row">
+        <div class="score-row-label" style="font-size:10px;">Ticker Mention</div>
+        <div class="mini-bar"><div class="mini-fill" style="width:${(breakdown.ticker/25)*100}%;background:#3b82f6;"></div></div>
+        <div class="score-row-val" style="font-size:10px;color:#60a5fa;">${breakdown.ticker}</div>
+      </div>
+      <div class="score-row">
+        <div class="score-row-label" style="font-size:10px;">Dramatic Claim</div>
+        <div class="mini-bar"><div class="mini-fill" style="width:${(breakdown.dramatic/25)*100}%;background:#f97316;"></div></div>
+        <div class="score-row-val" style="font-size:10px;color:#fb923c;">${breakdown.dramatic}</div>
+      </div>
+      <div class="score-row">
+        <div class="score-row-label" style="font-size:10px;">Policy Signal</div>
+        <div class="mini-bar"><div class="mini-fill" style="width:${(breakdown.policy/20)*100}%;background:#eab308;"></div></div>
+        <div class="score-row-val" style="font-size:10px;color:#fbbf24;">${breakdown.policy}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderFeed(posts) {
+  const container = document.getElementById('feed-list');
+  const noResults = document.getElementById('no-results');
+  if (posts.length === 0) {
+    container.innerHTML = '';
+    noResults.classList.remove('hidden');
+  } else {
+    noResults.classList.add('hidden');
+    container.innerHTML = posts.map(renderPost).join('');
+  }
+}
+
+// ════════════════════════════════════════
+//  FILTER LOGIC
+// ════════════════════════════════════════
+function setSort(sort, btn) {
+  currentSort = sort;
+  document.getElementById('sort-latest').classList.toggle('active', sort === 'latest');
+  document.getElementById('sort-score').classList.toggle('active', sort === 'score');
+  applyFilter();
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  // Only deactivate the filter chips (not sort chips)
+  document.querySelectorAll('.filter-chip:not(#sort-latest):not(#sort-score)').forEach(c => c.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  applyFilter();
+}
+
+function applyFilter() {
+  let filtered = [...allPosts];
+
+  // Apply filter
+  if (currentFilter === 'critical')   filtered = filtered.filter(p => p.score >= 80);
+  else if (currentFilter === 'high')  filtered = filtered.filter(p => p.score >= 60);
+  else if (currentFilter === 'engagement') filtered = filtered.filter(p => p.signals.includes('engagement'));
+  else if (currentFilter === 'ticker')     filtered = filtered.filter(p => p.signals.includes('ticker'));
+  else if (currentFilter === 'dramatic')   filtered = filtered.filter(p => p.signals.includes('dramatic'));
+  else if (currentFilter === 'policy')     filtered = filtered.filter(p => p.signals.includes('policy'));
+  else if (currentFilter === 'short')      filtered = filtered.filter(p => p.signals.includes('short'));
+
+  // Apply sort
+  if (currentSort === 'latest') {
+    filtered.sort((a, b) => (a.timeOrder ?? 0) - (b.timeOrder ?? 0));
+  } else {
+    filtered.sort((a, b) => b.score - a.score);
+  }
+
+  renderFeed(filtered);
+}
+
+function filterByPerson(personId, el) {
+  document.querySelectorAll('.person-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+
+  const filtered = allPosts.filter(p => p.authorId === personId);
+  if (filtered.length > 0) {
+    renderFeed(filtered);
+  } else {
+    renderFeed([]);
+  }
+  currentFilter = 'person_' + personId;
+}
+
+function expandPost(id) {
+  // In live version, this would expand to show full post + market data
+  const post = allPosts.find(p => p.id === id);
+  if (post && post.tickers.length > 0) {
+    alert(`Tickers mentioned: ${post.tickers.join(', ')}\n\nIn live mode, this would open a market data panel showing current price, pre/after-market movement, and chart for these tickers.`);
+  }
+}
+
+// ════════════════════════════════════════
+//  REFRESH SIMULATION
+// ════════════════════════════════════════
+function refreshFeed() {
+  const btn = document.querySelector('.refresh-btn');
+  btn.textContent = '⟳ Refreshing...';
+  btn.style.opacity = '0.6';
+  setTimeout(() => {
+    btn.textContent = '⟳ Refresh';
+    btn.style.opacity = '1';
+    document.getElementById('last-update').textContent = 'Last updated: just now';
+    applyFilter();
+  }, 1200);
+}
+
+// ════════════════════════════════════════
+//  SCROLL TO TOP
+// ════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  const feedArea = document.getElementById('feed-area');
+  const scrollBtn = document.getElementById('scroll-top');
+  feedArea.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', feedArea.scrollTop > 300);
+  });
+});
+
+// ════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════
+// ════════════════════════════════════════
+//  LIVE DATA LOADER
+// ════════════════════════════════════════
+
+function ingestLivePosts(posts, scanTime, summary) {
+  if (!posts || posts.length === 0) return false;
+
+  // Convert live scan format to dashboard card format
+  allPosts = posts.map((p, i) => ({
+    id: i + 1,
+    author:       p.author || "Unknown",
+    authorId:     (p.handle || p.author || "").replace("@","").toLowerCase(),
+    role:         p.role || "",
+    avatar:       (p.author || "?").split(" ").map(w => w[0]).join("").slice(0,2).toUpperCase(),
+    avatarColor:  p.direction === "bearish" ? "#ef4444" : p.direction === "bullish" ? "#22c55e" : "#3b82f6",
+    platform:     (p.platform || "X").toUpperCase(),
+    time:         p.time || (scanTime ? "Scan: " + new Date(scanTime).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : "recent"),
+    score:        p.score || 0,
+    scoreClass:   p.scoreClass || "low",
+    content:      highlightContent(p.content || p.text || ""),
+    signals:      p.signals || [],
+    signalLabels: buildSignalLabels(p),
+    metrics:      p.metrics || buildMetrics(p),
+    impactBreakdown: p.breakdown || p.impactBreakdown || {engagement:0,ticker:0,dramatic:0,policy:0},
+    tickers:      p.tickers || [],
+    timeOrder:    i,
+  }));
+
+  // Update watchlist post counts from live data
+  const countsByAuthor = {};
+  allPosts.forEach(p => { countsByAuthor[p.authorId] = (countsByAuthor[p.authorId] || 0) + 1; });
+
+  // Update UI
+  document.getElementById('live-data-bar').style.display = 'flex';
+  document.getElementById('demo-notice').style.display = 'none';
+  document.getElementById('live-post-count').textContent = posts.length;
+  document.getElementById('live-scan-time').textContent = scanTime ? new Date(scanTime).toLocaleString() : "unknown";
+  document.getElementById('live-summary').textContent = summary ? `"${summary}"` : "";
+  document.getElementById('stat-posts').textContent = posts.length;
+
+  // Show critical count
+  const critCount = allPosts.filter(p => p.score >= 80).length;
+  const highCount = allPosts.filter(p => p.score >= 60 && p.score < 80).length;
+  document.getElementById('stat-critical').textContent = critCount;
+  document.getElementById('stat-high').textContent = highCount;
+
+  // Update live badge
+  document.querySelector('.live-badge').innerHTML = '<div class="live-dot"></div> LIVE';
+
+  return true;
+}
+
+function highlightContent(text) {
+  // Wrap tickers and keywords in styled spans
+  return text
+    .replace(/\$([A-Z]{1,5})\b/g, '<span class="ticker-tag">$$$1</span>')
+    .replace(/\b(short|fraud|bankruptcy|collapse|underpriced|overpriced|massively)\b/gi,
+             '<span class="bearish">$1</span>')
+    .replace(/\b(10x|20x|5x|rally|breakout|undervalued)\b/gi,
+             '<span class="highlight">$1</span>');
+}
+
+function buildSignalLabels(p) {
+  const labels = [];
+  const b = p.breakdown || {};
+  if ((p.signals||[]).includes('engagement')) labels.push(`📈 ${p.engagement_spike ? p.engagement_spike+'× Avg' : 'Engagement Spike'}`);
+  if ((p.signals||[]).includes('ticker'))     labels.push(`💹 ${(p.tickers||[]).join(' / ') || 'Ticker'}`);
+  if ((p.signals||[]).includes('dramatic'))   labels.push('⚡ Dramatic Claim');
+  if ((p.signals||[]).includes('policy'))     labels.push('🏛️ Policy Signal');
+  if ((p.signals||[]).includes('short'))      labels.push('🔻 Short/Bear');
+  if ((p.signals||[]).includes('bullish'))    labels.push('🟢 Bullish');
+  return labels;
+}
+
+function buildMetrics(p) {
+  // Fallback when metrics not present in scan data
+  return {
+    views:   { value: "—", label: "Views",   class: "normal", vs: "" },
+    reposts: { value: "—", label: "Reposts", class: "normal", vs: "" },
+    likes:   { value: "—", label: "Likes",   class: "normal", vs: "" },
+    replies: { value: "—", label: "Replies", class: "normal", vs: "" },
+  };
+}
+
+function loadFileManually(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      let data;
+      const text = e.target.result;
+      // Handle both .json and live_data.js formats
+      if (file.name.endsWith('.js')) {
+        // Extract JSON from: var LIVE_DATA = {...};
+        const match = text.match(/LIVE_DATA\s*=\s*(\{[\s\S]*\});?/);
+        if (match) data = JSON.parse(match[1]);
+      } else {
+        data = JSON.parse(text);
+      }
+      if (data && data.posts_found) {
+        const ok = ingestLivePosts(data.posts_found, data.scan_time, data.summary);
+        if (ok) { applyFilter(); alert(`✅ Loaded ${data.posts_found.length} posts from scan at ${data.scan_time || 'unknown time'}.`); }
+        else { alert('No posts found in this scan file.'); }
+      } else {
+        alert('File format not recognised. Expected hourly_scan_results.json or live_data.js from MarketSentinel.');
+      }
+    } catch (err) {
+      alert('Could not read file: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function loadDemoData() {
+  allPosts = [...SAMPLE_POSTS];
+  allPosts.forEach((p, i) => { p.timeOrder = i; });
+  document.getElementById('live-data-bar').style.display = 'none';
+  document.getElementById('demo-notice').style.display = 'flex';
+  document.querySelector('.live-badge').innerHTML = '<div class="live-dot"></div> DEMO MODE';
+  applyFilter();
+}
+
+// ════════════════════════════════════════
+//  INIT — try live data first, else demo
+// ════════════════════════════════════════
+renderWatchlist();
+renderTickers();
+renderTopAuthors();
+
+// Check if live_data.js injected LIVE_DATA
+if (typeof LIVE_DATA !== 'undefined' && LIVE_DATA && LIVE_DATA.posts_found) {
+  ingestLivePosts(LIVE_DATA.posts_found, LIVE_DATA.scan_time, LIVE_DATA.summary);
+} else {
+  // Fall back to demo data
+  allPosts = [...SAMPLE_POSTS];
+  allPosts.forEach((p, i) => { p.timeOrder = i; });
+}
+
+// Default sort: latest first
+allPosts.sort((a, b) => (a.timeOrder ?? 0) - (b.timeOrder ?? 0));
+renderFeed(allPosts);
+
+// Live clock
+setInterval(() => {
+  const now = new Date();
+  const s = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  document.getElementById('last-update').textContent = `Last checked: ${s}`;
+}, 1000);
+</script>
+</body>
+</html>

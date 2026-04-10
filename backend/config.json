@@ -1,0 +1,83 @@
+{
+  "api_keys": {
+    "x_bearer_token": "YOUR_X_BEARER_TOKEN_HERE",
+    "x_api_key": "YOUR_X_API_KEY_HERE",
+    "x_api_secret": "YOUR_X_API_SECRET_HERE",
+    "x_access_token": "YOUR_X_ACCESS_TOKEN_HERE",
+    "x_access_secret": "YOUR_X_ACCESS_SECRET_HERE"
+  },
+  "settings": {
+    "fetch_interval_minutes": 60,
+    "lookback_hours": 24,
+    "min_score_to_save": 30,
+    "alert_threshold": 75,
+    "critical_threshold": 85,
+    "engagement_baseline_days": 30,
+    "engagement_spike_multiplier": 3.0,
+    "output_file": "../data/posts.json"
+  },
+  "watchlist": {
+    "hedge_fund_managers": [
+      { "name": "Bill Ackman",            "handle": "BillAckman",       "x_id": "19923144",   "platform": "x",     "category": "hedge_fund",  "credibility_weight": 1.0 },
+      { "name": "Michael Burry",           "handle": "michaeljburry",    "x_id": "823733649",  "platform": "x",     "category": "hedge_fund",  "credibility_weight": 1.0 },
+      { "name": "Ray Dalio",               "handle": "RayDalio",         "x_id": "732629306",  "platform": "x",     "category": "hedge_fund",  "credibility_weight": 0.9 },
+      { "name": "Stan Druckenmiller",      "handle": "StanleyDruck",     "x_id": "TODO",       "platform": "x",     "category": "hedge_fund",  "credibility_weight": 1.0 },
+      { "name": "David Einhorn",           "handle": "GreenLightCap",    "x_id": "TODO",       "platform": "x",     "category": "hedge_fund",  "credibility_weight": 0.9 },
+      { "name": "Dan Loeb",                "handle": "DanLoeb",          "x_id": "TODO",       "platform": "x",     "category": "hedge_fund",  "credibility_weight": 0.9 },
+      { "name": "Jeffrey Gundlach",        "handle": "TruthGundlach",    "x_id": "TODO",       "platform": "x",     "category": "hedge_fund",  "credibility_weight": 0.9 },
+      { "name": "Carl Icahn",              "handle": "Carl_C_Icahn",     "x_id": "TODO",       "platform": "x",     "category": "hedge_fund",  "credibility_weight": 0.85 },
+      { "name": "Michael Saylor",          "handle": "saylor",           "x_id": "244647486",  "platform": "x",     "category": "hedge_fund",  "credibility_weight": 0.85 }
+    ],
+    "short_sellers": [
+      { "name": "Muddy Waters Research",   "handle": "muddywatersre",    "x_id": "266688800",  "platform": "x",     "category": "short_seller","credibility_weight": 1.0 },
+      { "name": "Hindenburg Research",     "handle": "HindenburgRes",    "x_id": "TODO",       "platform": "x",     "category": "short_seller","credibility_weight": 1.0 },
+      { "name": "Citron Research",         "handle": "CitronResearch",   "x_id": "TODO",       "platform": "x",     "category": "short_seller","credibility_weight": 0.9 },
+      { "name": "Spruce Point Capital",    "handle": "SprucePointCap",   "x_id": "TODO",       "platform": "x",     "category": "short_seller","credibility_weight": 0.85 },
+      { "name": "Gotham City Research",    "handle": "GothamCityRes",    "x_id": "TODO",       "platform": "x",     "category": "short_seller","credibility_weight": 0.85 }
+    ],
+    "macro_policy": [
+      { "name": "Donald Trump",            "handle": "realDonaldTrump",  "x_id": "TODO",       "platform": "truth", "category": "policy",      "credibility_weight": 1.0 },
+      { "name": "Mohamed El-Erian",        "handle": "elerianm",         "x_id": "TODO",       "platform": "x",     "category": "macro",       "credibility_weight": 0.9 },
+      { "name": "Nouriel Roubini",         "handle": "Nouriel",          "x_id": "TODO",       "platform": "x",     "category": "macro",       "credibility_weight": 0.85 },
+      { "name": "Larry Summers",           "handle": "LHSummers",        "x_id": "TODO",       "platform": "x",     "category": "policy",      "credibility_weight": 0.9 },
+      { "name": "Scott Bessent",           "handle": "ScottBessent",     "x_id": "TODO",       "platform": "x",     "category": "policy",      "credibility_weight": 0.95 },
+      { "name": "Elon Musk",               "handle": "elonmusk",         "x_id": "44196397",   "platform": "x",     "category": "policy",      "credibility_weight": 0.9 }
+    ],
+    "market_commentators": [
+      { "name": "David Rosenberg",         "handle": "EconguyRosie",     "x_id": "TODO",       "platform": "x",     "category": "commentator", "credibility_weight": 0.8 },
+      { "name": "Dan Ives",                "handle": "DanIvesWedbush",   "x_id": "TODO",       "platform": "x",     "category": "commentator", "credibility_weight": 0.8 },
+      { "name": "Jim Cramer",              "handle": "jimcramer",        "x_id": "TODO",       "platform": "x",     "category": "commentator", "credibility_weight": 0.6 },
+      { "name": "Harris Kupperman",        "handle": "hkuppy",           "x_id": "TODO",       "platform": "x",     "category": "commentator", "credibility_weight": 0.75 }
+    ]
+  },
+  "scoring": {
+    "engagement": {
+      "max_points": 30,
+      "spike_tiers": [
+        { "multiplier": 20, "points": 30 },
+        { "multiplier": 10, "points": 24 },
+        { "multiplier": 5,  "points": 18 },
+        { "multiplier": 3,  "points": 12 },
+        { "multiplier": 1,  "points": 5  }
+      ]
+    },
+    "ticker_mention": {
+      "max_points": 25,
+      "base_per_ticker": 8,
+      "directional_bonus": 5,
+      "multiple_tickers_bonus": 4
+    },
+    "dramatic_claim": {
+      "max_points": 25,
+      "keywords": {
+        "extreme": ["10x", "20x", "100%", "fraud", "bankruptcy", "zero", "worthless", "massive short", "blow up", "collapse", "crisis"],
+        "high": ["underpriced", "overpriced", "massively", "dramatically", "short", "squeeze", "target price", "price target", "buy now", "sell now"],
+        "medium": ["undervalued", "overvalued", "opportunity", "risk", "warning", "caution", "position", "initiated"]
+      }
+    },
+    "policy_signal": {
+      "max_points": 20,
+      "keywords": ["tariff", "tariffs", "sanctions", "executive order", "fed", "federal reserve", "rate hike", "rate cut", "interest rate", "gdp", "recession", "stimulus", "bailout", "regulation", "deregulation", "ipo ban", "export controls", "treasury"]
+    }
+  }
+}
