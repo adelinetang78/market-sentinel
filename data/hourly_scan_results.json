@@ -1,0 +1,98 @@
+{
+  "scan_time": "2026-04-10T09:02:00Z",
+  "posts_found": [
+    {
+      "author": "Donald Trump",
+      "handle": "@realDonaldTrump",
+      "role": "US President",
+      "platform": "TRUTH",
+      "time": "~42 hours ago (Apr 8, 2026)",
+      "content": "Any country found to be supplying military weapons to Iran will immediately face tariffs of 50% on any and all goods imported to the United States, effective immediately. There will be no exclusions or exemptions.",
+      "score": 82,
+      "scoreClass": "critical",
+      "tickers": [],
+      "signals": ["engagement", "dramatic", "policy"],
+      "direction": "bearish",
+      "breakdown": {"engagement": 24, "ticker": 0, "dramatic": 18, "policy": 40},
+      "engagement_spike": 2.4,
+      "metrics": {
+        "views":   {"value": "18.3M", "label": "Views",   "class": "spike", "vs": "2.4× avg"},
+        "reposts": {"value": "42.5K", "label": "Reposts", "class": "spike", "vs": ""},
+        "likes":   {"value": "87.2K", "label": "Likes",   "class": "spike", "vs": ""},
+        "replies": {"value": "22.4K", "label": "Replies", "class": "above", "vs": ""}
+      },
+      "source_url": "https://www.cnbc.com/2026/04/08/trump-threatens-tariffs-countries-supplying-weapons-iran-ceasefire.html"
+    },
+    {
+      "author": "Michael Burry",
+      "handle": "@michaeljburry",
+      "role": "Scion Asset Management, famous short seller",
+      "platform": "X",
+      "time": "~20 hours ago (Apr 9, 2026) — POST DELETED",
+      "content": "Anthropic is eating Palantir's lunch. Anthropic captured 73% of all new enterprise spending. Went from $9B to $30B ARR in months. It took $PLTR 20 years to get to $5 Billion. PLTR can have government, which is low margin and small. Palantir's FDE model charges for human labor — Anthropic offers an API. $PLTR is the next Yahoo. [Post has since been deleted but caused ~$23B in PLTR market cap loss]",
+      "score": 80,
+      "scoreClass": "critical",
+      "tickers": ["PLTR"],
+      "signals": ["engagement", "ticker", "dramatic"],
+      "direction": "bearish",
+      "breakdown": {"engagement": 30, "ticker": 25, "dramatic": 25, "policy": 0},
+      "engagement_spike": 18.5,
+      "metrics": {
+        "views":   {"value": "4.2M",  "label": "Views",   "class": "spike", "vs": "18× avg"},
+        "reposts": {"value": "12.1K", "label": "Reposts", "class": "spike", "vs": ""},
+        "likes":   {"value": "35.4K", "label": "Likes",   "class": "spike", "vs": ""},
+        "replies": {"value": "4.2K",  "label": "Replies", "class": "spike", "vs": ""}
+      },
+      "source_url": "https://finance.yahoo.com/news/palantir-stock-plunges-after-big-short-investor-michael-burry-says-anthropic-is-eating-its-lunch-171120431.html"
+    },
+    {
+      "author": "Ray Dalio",
+      "handle": "@RayDalio",
+      "role": "Bridgewater Associates founder, macro investor",
+      "platform": "X",
+      "time": "~18 hours ago (Apr 9, 2026) — Substack + TIME",
+      "content": "The Big Thing: We Are In A World War That Isn't Going To End Anytime Soon. The US-Israel-Iran war is just part of a world war that we are in. We are at Step 9 of a 13-step cycle. Global markets are failing to adequately price in the long-term implications of a fragmented, multipolar conflict environment — leaving portfolios exposed to sustained inflationary pressures, regime shifts in global trade, and heightened volatility across asset classes. The post-1945 world order is dead.",
+      "score": 55,
+      "scoreClass": "medium",
+      "tickers": [],
+      "signals": ["engagement", "dramatic", "policy"],
+      "direction": "bearish",
+      "breakdown": {"engagement": 18, "ticker": 0, "dramatic": 22, "policy": 15},
+      "engagement_spike": 4.2,
+      "metrics": {
+        "views":   {"value": "2.8M", "label": "Views",   "class": "above", "vs": "4× avg"},
+        "reposts": {"value": "6.2K", "label": "Reposts", "class": "above", "vs": ""},
+        "likes":   {"value": "18.1K","label": "Likes",   "class": "above", "vs": ""},
+        "replies": {"value": "2.1K", "label": "Replies", "class": "above", "vs": ""}
+      },
+      "source_url": "https://raydalio.substack.com/p/the-big-thing-we-are-in-a-world-war"
+    },
+    {
+      "author": "Michael Saylor",
+      "handle": "@saylor",
+      "role": "Strategy (MicroStrategy) Executive Chairman, Bitcoin advocate",
+      "platform": "X",
+      "time": "~44 hours ago (Apr 8, 2026) — Mizuho Investor Event",
+      "content": "Bitcoin has likely bottomed near $60K. Forced sellers have been exhausted. The quantum threat to Bitcoin is theoretical and likely decades away — even then it's solvable. Bitcoin's open-source structure will allow developers to introduce quantum-resistant upgrades well before attacks become practical. BTC's next bull run will be driven by banking and digital credit adoption.",
+      "score": 48,
+      "scoreClass": "medium",
+      "tickers": ["BTC", "MSTR"],
+      "signals": ["ticker", "dramatic"],
+      "direction": "bullish",
+      "breakdown": {"engagement": 12, "ticker": 21, "dramatic": 15, "policy": 0},
+      "engagement_spike": 2.8,
+      "metrics": {
+        "views":   {"value": "1.4M", "label": "Views",   "class": "above", "vs": "2.8× avg"},
+        "reposts": {"value": "3.2K", "label": "Reposts", "class": "above", "vs": ""},
+        "likes":   {"value": "8.7K", "label": "Likes",   "class": "above", "vs": ""},
+        "replies": {"value": "1.1K", "label": "Replies", "class": "above", "vs": ""}
+      },
+      "source_url": "https://www.coindesk.com/markets/2026/04/08/michael-saylor-says-bitcoin-has-likely-bottomed-quantum-risk-overblown"
+    }
+  ],
+  "critical_alerts": [
+    "Donald Trump (TRUTH): 50% tariffs on ALL goods from any country supplying military weapons to Iran — effective immediately, no exclusions. Score: 82.",
+    "Michael Burry (@michaeljburry): Deleted post called $PLTR 'the next Yahoo' as Anthropic captures 73% of new enterprise spend — PLTR closed -7.3%, shedding $23B in market cap. Score: 80."
+  ],
+  "summary": "CRITICAL: Trump's immediate 50% Iran-weapons tariff threat (global trade escalation) and Burry's deleted PLTR short call (-$23B market cap) dominate; Dalio escalates world war warning as Iran ceasefire negotiations remain fragile."
+}
