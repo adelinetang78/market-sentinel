@@ -1,19 +1,19 @@
 {
-  "scan_time": "2026-04-13T15:00:00.000Z",
+  "scan_time": "2026-04-13T16:15:00Z",
   "posts_found": [
     {
       "author": "Donald Trump",
       "handle": "@realDonaldTrump",
       "role": "US President",
       "platform": "TRUTH",
-      "time": "Apr 12–13, 2026 — BREAKING: BLOCKADE NOW ACTIVE",
-      "content": "IRAN IS UNWILLING TO GIVE UP ITS NUCLEAR AMBITIONS! The United States Navy will begin the process of blockading any and all Ships trying to enter, or leave, the Strait of Hormuz, effective IMMEDIATELY. The blockade will remain in place until Iran opens the Strait to ALL traffic, and agrees to a PERMANENT nuclear deal. There will be NO exceptions. [CENTCOM confirmed implementation at 10:00 AM ET April 13. Peace talks in Islamabad collapsed after 21 hours. Iran IRGC has threatened 'severe force' against any military vessels approaching the Strait.]",
+      "time": "Apr 12–13, 2026 — BLOCKADE ACTIVE since 10AM ET",
+      "content": "IRAN IS UNWILLING TO GIVE UP ITS NUCLEAR AMBITIONS! The United States Navy will begin the process of blockading any and all Ships trying to enter, or leave, the Strait of Hormuz, effective IMMEDIATELY. The blockade will remain in place until Iran opens the Strait to ALL traffic, and agrees to a PERMANENT nuclear deal. There will be NO exceptions. [CENTCOM confirmed implementation at 10:00 AM ET April 13. Peace talks in Islamabad collapsed April 12 after 21 hours. Iran IRGC has threatened 'severe force' against any military vessels approaching the Strait.]",
       "score": 97,
       "scoreClass": "critical",
       "tickers": ["XOM", "CVX", "XLE", "OIL", "LMT", "RTX", "GLD", "USO"],
       "signals": ["engagement", "ticker", "dramatic", "policy"],
       "direction": "bearish",
-      "breakdown": {"engagement": 28, "ticker": 13, "dramatic": 22, "policy": 40},
+      "breakdown": {"engagement": 28, "ticker": 13, "dramatic": 22, "policy": 34},
       "engagement_spike": 15.0,
       "metrics": {
         "views":   {"value": "45M+",  "label": "Views",   "class": "spike", "vs": "~15× avg"},
@@ -21,32 +21,9 @@
         "likes":   {"value": "280K+", "label": "Likes",   "class": "spike", "vs": ""},
         "replies": {"value": "65K+",  "label": "Replies", "class": "spike", "vs": ""}
       },
-      "market_impact": "Brent crude +7.8% to ~$103/barrel (up 31% since war began Feb 28). European gas futures +18%. S&P 500 futures -0.7%. Gold $4,803/oz. Defense stocks (LMT, RTX) and energy (XOM, CVX) up. Bitcoin down. IEA calls this 'the largest supply disruption in history of global oil market.'",
-      "note": "CRITICAL ESCALATION. Full US naval blockade of Strait of Hormuz now underway — the world's most important energy chokepoint, handling ~20M barrels/day (20% of global seaborne oil trade). Iran IRGC has threatened 'severe force.' Peace talks in Islamabad collapsed Apr 12 after 21 hours. War began Feb 28 when US-Israel launched airstrikes on Iran. 2-week ceasefire (Apr 7) expired without deal. Lebanon conflict continues separately. At $170/barrel scenario, Bloomberg estimates stagflationary shock doubling impact on inflation and growth.",
+      "market_impact": "Brent crude +8% to ~$103/barrel (up 31% since war began Feb 28). European gas futures +18%. S&P 500 futures -0.7%. Gold $4,803/oz. Defense stocks (LMT, RTX) and energy (XOM, CVX) up strongly. Bitcoin down on risk-off. IEA: 'largest supply disruption in history of global oil market.' Strait carries ~20% of global seaborne oil (~20M barrels/day).",
+      "note": "CONFIRMED CRITICAL ESCALATION. US Naval blockade of Strait of Hormuz now active as of 10AM ET Apr 13. Peace talks in Islamabad collapsed Apr 12. Iran IRGC threatening 'severe force.' War began Feb 28 (US-Israel airstrikes on Iran). The 2-week ceasefire agreed Apr 7–8 expired without deal. At $170/barrel scenario, Bloomberg estimates stagflationary shock doubling impact on inflation and growth.",
       "source_url": "https://www.cnbc.com/2026/04/12/trump-iran-war-strait-of-hormuz.html"
-    },
-    {
-      "author": "Scott Bessent",
-      "handle": "@SecScottBessent",
-      "role": "US Treasury Secretary",
-      "platform": "X",
-      "time": "Recent days — April 2026",
-      "content": "Iran is the head of the snake for global terrorism, and through President Trump's Operation Epic Fury, we are winning this critical fight at an even faster pace than anticipated. In response to Iran's terrorist attacks against global energy infrastructure, the Trump administration is prepared to use every economic and financial tool available. [Separately ruled out government intervention in oil futures market. Flagged potential SPR release but no market intervention. Announced short-term authorisation permitting sale of Iranian oil at sea, effective through April 19, to add ~140M barrels to global supply.]",
-      "score": 74,
-      "scoreClass": "high",
-      "tickers": ["XOM", "CVX", "OIL", "USO"],
-      "signals": ["engagement", "dramatic", "policy"],
-      "direction": "bearish",
-      "breakdown": {"engagement": 18, "ticker": 8, "dramatic": 18, "policy": 30},
-      "engagement_spike": 5.5,
-      "metrics": {
-        "views":   {"value": "~6M",  "label": "Views",   "class": "spike", "vs": "~5× avg (est)"},
-        "reposts": {"value": "~18K", "label": "Reposts", "class": "spike", "vs": ""},
-        "likes":   {"value": "~44K", "label": "Likes",   "class": "spike", "vs": ""},
-        "replies": {"value": "~9K",  "label": "Replies", "class": "above", "vs": ""}
-      },
-      "note": "Treasury Secretary confirming scope of 'Operation Epic Fury.' Key signal: ruling out oil futures market intervention means no price ceiling — oil prices will find their own level. Short-term Iran oil sanctions relief (through Apr 19 only) shows administration is managing oil shock tactically but not strategically. Watch for SPR release announcement as next lever.",
-      "source_url": "https://x.com/SecScottBessent/status/2035131840604881359"
     },
     {
       "author": "Donald Trump",
@@ -74,12 +51,12 @@
       "author": "Michael Burry",
       "handle": "@michaeljburry",
       "role": "Scion Asset Management, famous short seller",
-      "platform": "X",
-      "time": "~5 days ago (Apr 8, 2026) — POST DELETED; Substack Apr 10 confirms position still active",
-      "content": "Anthropic is eating $PLTR Palantir's lunch. Anthropic captured 73% of all new enterprise spending per Ramp. Went from $9B to $30B ARR in months. It took $PLTR 20 years to get to $5 Billion. PLTR can have government, which is low margin and small. Anthropic offers an API; Palantir's FDE model charges for human labor. [X post deleted but caused ~$23B in PLTR market cap loss, stock -7.3%. Apr 10 Substack confirms still short ~$1B notional via long-dated puts — June 2027 $50 strike and Dec 2026 $100 strike. 'PLTR is fundamentally worth less than half of its current market price.' Stock down 28% YTD.]",
+      "platform": "X + Substack",
+      "time": "~5 days ago (Apr 8–10, 2026) — position confirmed still active",
+      "content": "Anthropic is eating $PLTR Palantir's lunch. Anthropic captured 73% of all new enterprise spending per Ramp. Went from $9B to $30B ARR in months. It took $PLTR 20 years to get to $5 Billion. PLTR can have government, which is low margin and small. Anthropic offers an API; Palantir's FDE model charges for human labor. [Original X post deleted Apr 8 after causing ~$23B in PLTR market cap loss, stock -7.3%. Apr 10 Substack Trade Alert confirms still short ~$1B notional via long-dated puts — June 2027 $50 strike and Dec 2026 $100 strike. 'PLTR is fundamentally worth less than half its current market price.' Stock down 28% YTD. Also holding Jan 2027 $115 NVDA puts.]",
       "score": 80,
       "scoreClass": "critical",
-      "tickers": ["PLTR"],
+      "tickers": ["PLTR", "NVDA"],
       "signals": ["engagement", "ticker", "dramatic"],
       "direction": "bearish",
       "breakdown": {"engagement": 30, "ticker": 25, "dramatic": 25, "policy": 0},
@@ -88,9 +65,32 @@
         "views":   {"value": "4.2M",  "label": "Views",   "class": "spike", "vs": "18× avg"},
         "reposts": {"value": "12.1K", "label": "Reposts", "class": "spike", "vs": ""},
         "likes":   {"value": "35.4K", "label": "Likes",   "class": "spike", "vs": ""},
-        "replies": {"value": "4.2K",  "label": "Replies", "class": "spike",  "vs": ""}
+        "replies": {"value": "4.2K",  "label": "Replies", "class": "spike", "vs": ""}
       },
-      "source_url": "https://substack.com/@michaeljburry/note/c-241333352"
+      "source_url": "https://michaeljburry.substack.com/p/trade-alert-friday-april-10-2026"
+    },
+    {
+      "author": "Scott Bessent",
+      "handle": "@SecScottBessent",
+      "role": "US Treasury Secretary",
+      "platform": "X",
+      "time": "Recent days — April 2026",
+      "content": "Iran is the head of the snake for global terrorism, and through President Trump's Operation Epic Fury, we are winning this critical fight at an even faster pace than anticipated. In response to Iran's terrorist attacks against global energy infrastructure, the Trump administration is prepared to use every economic and financial tool available. [Separately ruled out government intervention in oil futures market. Flagged potential SPR release but no market intervention. Announced short-term authorisation permitting sale of Iranian oil at sea, effective through April 19, to add ~140M barrels to global supply.]",
+      "score": 74,
+      "scoreClass": "high",
+      "tickers": ["XOM", "CVX", "OIL", "USO"],
+      "signals": ["engagement", "dramatic", "policy"],
+      "direction": "bearish",
+      "breakdown": {"engagement": 18, "ticker": 8, "dramatic": 18, "policy": 30},
+      "engagement_spike": 5.5,
+      "metrics": {
+        "views":   {"value": "~6M",  "label": "Views",   "class": "spike", "vs": "~5× avg (est)"},
+        "reposts": {"value": "~18K", "label": "Reposts", "class": "spike", "vs": ""},
+        "likes":   {"value": "~44K", "label": "Likes",   "class": "spike", "vs": ""},
+        "replies": {"value": "~9K",  "label": "Replies", "class": "above", "vs": ""}
+      },
+      "note": "Key signal: ruling out oil futures market intervention means no government price ceiling — oil prices will find their own level. Short-term Iran oil sanctions relief (through Apr 19 only) is tactical not strategic. Watch for SPR release announcement as next lever.",
+      "source_url": "https://x.com/SecScottBessent/status/2035131840604881359"
     },
     {
       "author": "Bill Ackman",
@@ -120,18 +120,18 @@
       "role": "Bridgewater Associates founder, macro investor",
       "platform": "X",
       "time": "~4 days ago (Apr 9, 2026)",
-      "content": "It's Official: The World Order Has Broken Down. We Are In A World War That Isn't Going To End Anytime Soon. The US-Israel-Iran war is just part of a world war that we are in. We are at Step 9 of a 13-step cycle. Global markets are failing to adequately price in the long-term implications of a fragmented, multipolar conflict environment — leaving portfolios exposed to sustained inflationary pressures, regime shifts in global trade, and heightened volatility across asset classes. The post-1945 world order is dead.",
-      "score": 55,
-      "scoreClass": "medium",
+      "content": "It's Official: The World Order Has Broken Down. We Are In A World War That Isn't Going To End Anytime Soon. The US-Israel-Iran war is just part of a world war that we are in. We are at Step 9 of a 13-step cycle that historically precedes all-out world wars. Global markets are failing to adequately price in the long-term implications of a fragmented, multipolar conflict environment — leaving portfolios exposed to sustained inflationary pressures, regime shifts in global trade, and heightened volatility across asset classes. The post-1945 world order is dead.",
+      "score": 65,
+      "scoreClass": "high",
       "tickers": [],
       "signals": ["engagement", "dramatic", "policy"],
       "direction": "bearish",
-      "breakdown": {"engagement": 18, "ticker": 0, "dramatic": 22, "policy": 15},
-      "engagement_spike": 4.2,
+      "breakdown": {"engagement": 18, "ticker": 5, "dramatic": 25, "policy": 17},
+      "engagement_spike": 7.2,
       "metrics": {
-        "views":   {"value": "2.8M", "label": "Views",   "class": "above", "vs": "4× avg"},
-        "reposts": {"value": "6.2K", "label": "Reposts", "class": "above", "vs": ""},
-        "likes":   {"value": "18.1K","label": "Likes",   "class": "above", "vs": ""},
+        "views":   {"value": "2.8M", "label": "Views",   "class": "spike", "vs": "~7× avg"},
+        "reposts": {"value": "8.9K", "label": "Reposts", "class": "spike", "vs": ""},
+        "likes":   {"value": "42K",  "label": "Likes",   "class": "spike", "vs": ""},
         "replies": {"value": "2.1K", "label": "Replies", "class": "above", "vs": ""}
       },
       "source_url": "https://x.com/RayDalio/status/2022788750388998543"
@@ -151,10 +151,10 @@
       "breakdown": {"engagement": 18, "ticker": 13, "dramatic": 22, "policy": 0},
       "engagement_spike": 5.1,
       "metrics": {
-        "views":   {"value": "4.2M",  "label": "Views",   "class": "spike", "vs": "5× avg"},
-        "reposts": {"value": "15K",   "label": "Reposts", "class": "above", "vs": ""},
-        "likes":   {"value": "44K",   "label": "Likes",   "class": "above", "vs": ""},
-        "replies": {"value": "8.2K",  "label": "Replies", "class": "above", "vs": ""}
+        "views":   {"value": "4.2M", "label": "Views",   "class": "spike", "vs": "5× avg"},
+        "reposts": {"value": "15K",  "label": "Reposts", "class": "above", "vs": ""},
+        "likes":   {"value": "44K",  "label": "Likes",   "class": "above", "vs": ""},
+        "replies": {"value": "8.2K", "label": "Replies", "class": "above", "vs": ""}
       },
       "source_url": "https://x.com/michaeljburry/status/1987918650104283372"
     },
@@ -173,10 +173,10 @@
       "breakdown": {"engagement": 18, "ticker": 5, "dramatic": 22, "policy": 5},
       "engagement_spike": 5.8,
       "metrics": {
-        "views":   {"value": "3.1M",  "label": "Views",   "class": "spike", "vs": "6× avg"},
-        "reposts": {"value": "9.8K",  "label": "Reposts", "class": "above", "vs": ""},
-        "likes":   {"value": "28K",   "label": "Likes",   "class": "above", "vs": ""},
-        "replies": {"value": "5.1K",  "label": "Replies", "class": "above", "vs": ""}
+        "views":   {"value": "3.1M", "label": "Views",   "class": "spike", "vs": "6× avg"},
+        "reposts": {"value": "9.8K", "label": "Reposts", "class": "above", "vs": ""},
+        "likes":   {"value": "28K",  "label": "Likes",   "class": "above", "vs": ""},
+        "replies": {"value": "5.1K", "label": "Replies", "class": "above", "vs": ""}
       },
       "source_url": "https://www.cnbc.com/2026/03/23/jeffrey-gundlach-says-its-a-going-nowhere-market-warns-of-private-credit-strains.html"
     },
@@ -186,7 +186,7 @@
       "role": "Strategy Inc. (fmr MicroStrategy) Executive Chairman, Bitcoin",
       "platform": "X",
       "time": "~1 day ago (Apr 12, 2026)",
-      "content": "Think Bigger. [shared chart of Strategy's BTC purchase history — widely interpreted as an imminent Bitcoin accumulation signal. Strategy holds 766,970 BTC (~$54.47B). Most recent purchase Apr 6: 4,871 BTC for $329.8M. Strategy currently sitting on $14.5B unrealized loss. Post arrived as Bitcoin fell 2.5% on U.S. Navy entering Strait of Hormuz over Iranian naval mines, signalling Saylor buying the dip.]",
+      "content": "Think Bigger. [posted his 13th 2026 Strategy BTC tracker chart — widely interpreted as an imminent Bitcoin accumulation signal. Strategy holds 766,970 BTC (~$54.47B). Most recent purchase Apr 6: 4,871 BTC for $329.8M. Strategy currently holding $14.5B unrealized loss. Post arrived as Bitcoin fell 2.5% on naval Strait of Hormuz escalation, signaling Saylor buying the dip.]",
       "score": 48,
       "scoreClass": "medium",
       "tickers": ["MSTR", "BTC"],
@@ -208,7 +208,7 @@
       "role": "Wedbush Securities — Managing Director, Senior Tech Analyst",
       "platform": "X",
       "time": "~3 days ago (Apr 10, 2026)",
-      "content": "The take that Anthropic is eating $PLTR's lunch is the wrong take and fictional narrative. Palantir is at the epicenter of leaders in the AI Revolution and is a Core AI winner and tech leader. Burry is fundamentally misreading what PLTR actually sells — an ontology/digital twin that acts as a digital brain for an entire organization — not a chatbot API. This is way overblown. Maintaining Outperform, $230 PT on $PLTR.",
+      "content": "The take that Anthropic is eating $PLTR's lunch is the wrong take and a fictional narrative. Palantir is at the epicenter of leaders in the AI Revolution and is a Core AI winner and tech leader. Burry is fundamentally misreading what PLTR actually sells — an ontology/digital twin that acts as a digital brain for an entire organization — not a chatbot API. This is way overblown. Maintaining Outperform, $230 PT on $PLTR.",
       "score": 43,
       "scoreClass": "medium",
       "tickers": ["PLTR"],
@@ -222,7 +222,7 @@
         "likes":   {"value": "~18K",  "label": "Likes",   "class": "above", "vs": ""},
         "replies": {"value": "~3.2K", "label": "Replies", "class": "above", "vs": ""}
       },
-      "note": "Direct rebuttal to Burry's PLTR short thesis. Ives argues Burry misunderstands Palantir's product (ontology/digital twin vs API chatbot). $230 PT implies >150% upside from current levels.",
+      "note": "Direct rebuttal to Burry's PLTR short thesis. Ives argues Burry misunderstands Palantir's product (ontology/digital twin vs API chatbot). $230 PT implies >150% upside from current ~$127 market price.",
       "source_url": "https://www.benzinga.com/markets/tech/26/04/51747675/michael-burry-anthropic-palantir-wrong-take-top-analyst"
     },
     {
@@ -245,7 +245,7 @@
         "likes":   {"value": "~12K",  "label": "Likes",   "class": "above", "vs": ""},
         "replies": {"value": "~1.8K", "label": "Replies", "class": "above", "vs": ""}
       },
-      "note": "Recommends American investors go 100% non-US stocks. Implies structural dollar weakness and fiscal unsustainability ahead. 'Rules can be changed' signals Gundlach is pricing in potential debt monetisation.",
+      "note": "Recommends American investors go 100% non-US stocks. Implies structural dollar weakness and fiscal unsustainability. 'Rules can be changed' signals Gundlach is pricing in potential debt monetisation.",
       "source_url": "https://www.benzinga.com/markets/bonds/26/04/51645327/billionaire-bond-king-warns-investors-rules-can-be-changed"
     },
     {
@@ -272,20 +272,19 @@
     }
   ],
   "critical_alerts": [
-    "🚨 BREAKING — Donald Trump (TRUTH SOCIAL, Apr 13): US NAVAL BLOCKADE OF STRAIT OF HORMUZ NOW ACTIVE as of 10AM ET. Peace talks in Islamabad collapsed after 21 hours. Brent crude +7.8% to ~$103. European gas +18%. S&P 500 futures -0.7%. Iran IRGC threatening 'severe force.' Score: 97.",
-    "Scott Bessent (@SecScottBessent): 'Iran is the head of the snake for global terrorism — Operation Epic Fury winning faster than anticipated.' Rules out oil futures market intervention — no government price ceiling. Short-term Iranian oil sanctions relief through Apr 19 only. Watch for SPR release as next lever. Score: 74 (HIGH).",
-    "Donald Trump (TRUTH SOCIAL, Apr 8): 50% tariffs on ALL goods from any country supplying military weapons to Iran — effective immediately, no exclusions or exemptions. Score: 82.",
-    "Michael Burry (@michaeljburry): Confirmed ~$1B short on $PLTR via long-dated puts (Substack Apr 10). Stock -7.3%, $23B wiped. Still active. Score: 80."
+    "🚨 BREAKING — Donald Trump (TRUTH SOCIAL, Apr 12–13): US NAVAL BLOCKADE OF STRAIT OF HORMUZ ACTIVE as of 10AM ET Apr 13. Peace talks in Islamabad collapsed after 21 hours. Brent crude +8% to ~$103. European gas +18%. S&P 500 futures -0.7%. Iran IRGC threatening 'severe force.' Strait handles ~20% of global seaborne oil. Score: 97.",
+    "Donald Trump (TRUTH SOCIAL, Apr 8): 50% tariffs on ALL goods from any country supplying military weapons to Iran — effective immediately, no exclusions or exemptions. Aimed explicitly at China. Score: 82.",
+    "Michael Burry (@michaeljburry, Apr 8–10): Confirmed ~$1B short on $PLTR via long-dated puts ($50 & $100 strike vs ~$127 market). 'Not selling today.' PLTR -7.3% on release, down 28% YTD. Also shorting $NVDA (Jan 2027 $115 puts). Score: 80."
   ],
   "market_snapshot": {
-    "brent_crude": "+7.8% to ~$103/barrel (up 31% since war began Feb 28)",
+    "brent_crude": "+8% to ~$103/barrel (up 31% since war began Feb 28)",
     "european_gas": "+18% today",
     "sp500_futures": "-0.7%",
     "gold": "$4,803/oz (safe haven bid)",
-    "defense_stocks": "LMT, RTX up",
-    "energy_stocks": "XOM, CVX up",
-    "bitcoin": "Falling — risk-off",
-    "context": "IEA: 'Largest supply disruption in history of global oil market.' ~11M barrels/day offline. At $170/barrel, Bloomberg estimates stagflationary shock."
+    "defense_stocks": "LMT, RTX strongly up",
+    "energy_stocks": "XOM, CVX strongly up",
+    "bitcoin": "Falling — risk-off, -2.5% on escalation",
+    "context": "IEA: 'Largest supply disruption in history of global oil market.' ~20M barrels/day at risk. At $170/barrel, Bloomberg estimates stagflationary shock doubling impact on inflation and growth."
   },
-  "summary": "🚨 BREAKING: US NAVAL BLOCKADE OF STRAIT OF HORMUZ ACTIVATED TODAY (Apr 13, 10AM ET) after Islamabad peace talks collapsed. Trump Truth Social: 'IRAN IS UNWILLING TO GIVE UP ITS NUCLEAR AMBITIONS!' Iran IRGC threatening 'severe force.' Brent +7.8% to $103, European gas +18%, S&P futures -0.7%, Gold $4,803/oz. Bessent confirms Operation Epic Fury 'winning faster than anticipated' but rules out oil market intervention. War began Feb 28; Strait of Hormuz handles 20% of global seaborne oil. IEA calls this the largest energy supply disruption in history. Background bearish signals remain: Burry's PLTR short (~$1B), Ackman's 'economic nuclear winter' warning, Dalio's 'world war Step 9 of 13', Gundlach's '100% non-US stocks' call."
+  "summary": "🚨 CRITICAL: US Naval blockade of Strait of Hormuz activated 10AM ET (Apr 13) after Islamabad peace talks collapsed — Brent +8% to $103, European gas +18%, S&P futures -0.7%, Gold $4,803/oz. Background bearish signals confirmed this scan: Burry's $1B PLTR short (target $50, -61% from market, down 28% YTD), Trump's 50% Iran-weapons tariffs, Dalio's 'world war Step 9 of 13', Ackman's 'economic nuclear winter', Gundlach's 'it's 2007 for private credit' and '100% non-US stocks' call."
 }
