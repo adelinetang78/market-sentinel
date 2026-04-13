@@ -1,5 +1,5 @@
 var LIVE_DATA = {
-  "scan_time": "2026-04-13T16:15:00Z",
+  "scan_time": "2026-04-13T17:00:00Z",
   "posts_found": [
     {
       "author": "Donald Trump",
@@ -30,43 +30,45 @@ var LIVE_DATA = {
       "handle": "@realDonaldTrump",
       "role": "US President",
       "platform": "TRUTH",
-      "time": "~5 days ago (Apr 8, 2026)",
-      "content": "Any country found to be supplying military weapons to Iran will immediately face tariffs of 50% on any and all goods imported to the United States, effective immediately. There will be no exclusions or exemptions.",
-      "score": 82,
+      "time": "Apr 8 (Truth Social) + Apr 13 update (Fox News \u2014 China named explicitly)",
+      "content": "Any country found to be supplying military weapons to Iran will immediately face tariffs of 50% on any and all goods imported to the United States, effective immediately. There will be no exclusions or exemptions. [Apr 13 Fox News update: Trump explicitly named China for the first time \u2014 'if we catch them doing that, they get a 50% tariff, which is a staggering amount.' Newsweek, CNBC, Al Jazeera, South China Morning Post all confirm April 13 coverage. Reports suggest China was preparing to deliver shoulder-fired anti-aircraft missiles to Iran.]",
+      "score": 85,
       "scoreClass": "critical",
-      "tickers": [],
+      "tickers": ["FXI", "MCHI"],
       "signals": ["engagement", "dramatic", "policy"],
       "direction": "bearish",
-      "breakdown": {"engagement": 24, "ticker": 0, "dramatic": 18, "policy": 40},
-      "engagement_spike": 2.4,
+      "breakdown": {"engagement": 24, "ticker": 3, "dramatic": 18, "policy": 40},
+      "engagement_spike": 4.2,
       "metrics": {
-        "views":   {"value": "18.3M", "label": "Views",   "class": "spike", "vs": "2.4\u00d7 avg"},
+        "views":   {"value": "18.4M", "label": "Views",   "class": "spike", "vs": "~4\u00d7 avg"},
         "reposts": {"value": "42.5K", "label": "Reposts", "class": "spike", "vs": ""},
         "likes":   {"value": "87.2K", "label": "Likes",   "class": "spike", "vs": ""},
         "replies": {"value": "22.4K", "label": "Replies", "class": "above", "vs": ""}
       },
-      "source_url": "https://www.cnbc.com/2026/04/08/trump-threatens-tariffs-countries-supplying-weapons-iran-ceasefire.html"
+      "note": "UPDATED THIS SCAN: Trump escalated Apr 8 TRUTH post by naming China explicitly on Fox News Sunday April 13. Reports that Beijing was preparing arms delivery to Iran (shoulder-fired AA missiles). China denied. This directly risks a full US\u2013China trade escalation layered on top of the Iran war.",
+      "source_url": "https://www.cnbc.com/2026/04/13/trump-threatens-50percent-tariffs-on-china-as-report-suggests-plans-for-arms-shipment-to-iran.html"
     },
     {
       "author": "Michael Burry",
       "handle": "@michaeljburry",
       "role": "Scion Asset Management, famous short seller",
       "platform": "X + Substack",
-      "time": "~5 days ago (Apr 8\u201310, 2026) \u2014 position confirmed still active",
-      "content": "Anthropic is eating $PLTR Palantir's lunch. Anthropic captured 73% of all new enterprise spending per Ramp. Went from $9B to $30B ARR in months. It took $PLTR 20 years to get to $5 Billion. PLTR can have government, which is low margin and small. Anthropic offers an API; Palantir's FDE model charges for human labor. [Original X post deleted Apr 8 after causing ~$23B in PLTR market cap loss, stock -7.3%. Apr 10 Substack Trade Alert confirms still short ~$1B notional via long-dated puts \u2014 June 2027 $50 strike and Dec 2026 $100 strike. 'PLTR is fundamentally worth less than half its current market price.' Stock down 28% YTD. Also holding Jan 2027 $115 NVDA puts.]",
-      "score": 80,
+      "time": "Apr 8\u201313, 2026 \u2014 PLTR short confirmed; NVDA puts expanded today",
+      "content": "Anthropic is eating $PLTR Palantir's lunch. Anthropic captured 73% of all new enterprise spending per Ramp. Went from $9B to $30B ARR in months. It took $PLTR 20 years to get to $5 Billion. PLTR can have government, which is low margin and small. Anthropic offers an API; Palantir's FDE model charges for human labor. [Original X post deleted Apr 8 after causing ~$23B in PLTR market cap loss, stock -7.3%. Apr 10 Substack Trade Alert confirms still short ~$1B notional via long-dated puts \u2014 June 2027 $50 strike and Dec 2026 $100 strike. 'PLTR is fundamentally worth less than half its current market price.' Stock down 28% YTD. UPDATED APR 13: New Substack disclosure \u2014 added Jan 2027 $115-strike $NVDA puts at $3.30. Also holding $100-strike NVDA puts from earlier. Compares Nvidia to Cisco \u2014 which lost 90% and took 25 years to recover its 2000 peak. Estimates AI hyperscalers will understate depreciation by $176B in 2026\u20132028.]",
+      "score": 82,
       "scoreClass": "critical",
-      "tickers": ["PLTR", "NVDA"],
+      "tickers": ["PLTR", "NVDA", "META", "GOOGL", "MSFT", "AMZN"],
       "signals": ["engagement", "ticker", "dramatic"],
       "direction": "bearish",
       "breakdown": {"engagement": 30, "ticker": 25, "dramatic": 25, "policy": 0},
       "engagement_spike": 18.5,
       "metrics": {
-        "views":   {"value": "4.2M",  "label": "Views",   "class": "spike", "vs": "18\u00d7 avg"},
+        "views":   {"value": "4.2M+", "label": "Views",   "class": "spike", "vs": "18\u00d7 avg"},
         "reposts": {"value": "12.1K", "label": "Reposts", "class": "spike", "vs": ""},
         "likes":   {"value": "35.4K", "label": "Likes",   "class": "spike", "vs": ""},
         "replies": {"value": "4.2K",  "label": "Replies", "class": "spike", "vs": ""}
       },
+      "note": "UPDATED THIS SCAN: Burry disclosed additional NVDA puts (Jan 2027 $115 strike at $3.30) via Substack on April 13. PLTR short thesis confirmed still active, Burry says he is 'not selling today.' Cisco/90%-loss comparison is explicit. gurufocus.com confirmed Burry also boosted Alibaba (BABA) and JD.com (JD) \u2014 China consumer long while shorting US AI infrastructure.",
       "source_url": "https://michaeljburry.substack.com/p/trade-alert-friday-april-10-2026"
     },
     {
@@ -93,6 +95,29 @@ var LIVE_DATA = {
       "source_url": "https://x.com/SecScottBessent/status/2035131840604881359"
     },
     {
+      "author": "Ray Dalio",
+      "handle": "@RayDalio",
+      "role": "Bridgewater Associates founder, macro investor",
+      "platform": "X",
+      "time": "~4 days ago (Apr 9, 2026) + Apr 11 Hormuz warning",
+      "content": "It's Official: The World Order Has Broken Down. We Are In A World War That Isn't Going To End Anytime Soon. The US-Israel-Iran war is just part of a world war that we are in. We are at Step 9 of a 13-step cycle that historically precedes all-out world wars. Global markets are failing to adequately price in the long-term implications of a fragmented, multipolar conflict environment \u2014 leaving portfolios exposed to sustained inflationary pressures, regime shifts in global trade, and heightened volatility across asset classes. The post-1945 world order is dead. [Apr 11 update: whoever controls the Strait of Hormuz wins the Iran war \u2014 and the dollar's fate hangs in the balance. 'Sell out of all debt and buy gold.' Compares potential US failure at Hormuz to Britain's 1956 Suez Crisis humiliation. Time Magazine Apr 9: 'We may be entering a World War.']",
+      "score": 68,
+      "scoreClass": "high",
+      "tickers": ["GLD"],
+      "signals": ["engagement", "ticker", "dramatic", "policy"],
+      "direction": "bearish",
+      "breakdown": {"engagement": 18, "ticker": 13, "dramatic": 25, "policy": 12},
+      "engagement_spike": 7.2,
+      "metrics": {
+        "views":   {"value": "4.7M", "label": "Views",   "class": "spike", "vs": "~7\u00d7 avg"},
+        "reposts": {"value": "8.9K", "label": "Reposts", "class": "spike", "vs": ""},
+        "likes":   {"value": "42K",  "label": "Likes",   "class": "spike", "vs": ""},
+        "replies": {"value": "2.1K", "label": "Replies", "class": "above", "vs": ""}
+      },
+      "note": "Dalio specifically advises: sell debt, buy gold. Estimates markets are badly mispricing duration and tail risk. Analogizes US naval overextension to British Suez disaster. His 13-step world war cycle places us at Step 9 \u2014 4 steps before 'all-out world war' conditions.",
+      "source_url": "https://time.com/article/2026/04/09/ray-dalio-we-may-be-entering-a-world-war/"
+    },
+    {
       "author": "Bill Ackman",
       "handle": "@BillAckman",
       "role": "Pershing Square Capital Management",
@@ -113,28 +138,6 @@ var LIVE_DATA = {
         "replies": {"value": "31K",   "label": "Replies", "class": "above", "vs": ""}
       },
       "source_url": "https://www.musicbusinessworldwide.com/bill-ackman-who-wants-to-move-umgs-financial-hq-to-the-us-calls-for-time-out-on-trumps-tariff-war/"
-    },
-    {
-      "author": "Ray Dalio",
-      "handle": "@RayDalio",
-      "role": "Bridgewater Associates founder, macro investor",
-      "platform": "X",
-      "time": "~4 days ago (Apr 9, 2026)",
-      "content": "It's Official: The World Order Has Broken Down. We Are In A World War That Isn't Going To End Anytime Soon. The US-Israel-Iran war is just part of a world war that we are in. We are at Step 9 of a 13-step cycle that historically precedes all-out world wars. Global markets are failing to adequately price in the long-term implications of a fragmented, multipolar conflict environment \u2014 leaving portfolios exposed to sustained inflationary pressures, regime shifts in global trade, and heightened volatility across asset classes. The post-1945 world order is dead.",
-      "score": 65,
-      "scoreClass": "high",
-      "tickers": [],
-      "signals": ["engagement", "dramatic", "policy"],
-      "direction": "bearish",
-      "breakdown": {"engagement": 18, "ticker": 5, "dramatic": 25, "policy": 17},
-      "engagement_spike": 7.2,
-      "metrics": {
-        "views":   {"value": "2.8M", "label": "Views",   "class": "spike", "vs": "~7\u00d7 avg"},
-        "reposts": {"value": "8.9K", "label": "Reposts", "class": "spike", "vs": ""},
-        "likes":   {"value": "42K",  "label": "Likes",   "class": "spike", "vs": ""},
-        "replies": {"value": "2.1K", "label": "Replies", "class": "above", "vs": ""}
-      },
-      "source_url": "https://x.com/RayDalio/status/2022788750388998543"
     },
     {
       "author": "Michael Burry",
@@ -185,45 +188,22 @@ var LIVE_DATA = {
       "handle": "@saylor",
       "role": "Strategy Inc. (fmr MicroStrategy) Executive Chairman, Bitcoin",
       "platform": "X",
-      "time": "~1 day ago (Apr 12, 2026)",
-      "content": "Think Bigger. [posted his 13th 2026 Strategy BTC tracker chart \u2014 widely interpreted as an imminent Bitcoin accumulation signal. Strategy holds 766,970 BTC (~$54.47B). Most recent purchase Apr 6: 4,871 BTC for $329.8M. Strategy currently holding $14.5B unrealized loss. Post arrived as Bitcoin fell 2.5% on naval Strait of Hormuz escalation, signaling Saylor buying the dip.]",
+      "time": "~1 day ago (Apr 12\u201313, 2026)",
+      "content": "Think \u20bfigger. [posted BTC acquisition tracker chart \u2014 universally read as an imminent Bitcoin accumulation signal. Strategy holds 766,970 BTC (~$54.47B). Most recent purchase Apr 6: 4,871 BTC for $329.8M. Saylor confirmed Apr 12: Strategy's breakeven annual BTC return is 2.05%, enabling an 'infinite cycle' of BTC accumulation without issuing new $MSTR shares. Post arrived as Bitcoin fell 2.5% on Hormuz escalation \u2014 signaling Saylor is buying the dip.]",
       "score": 48,
       "scoreClass": "medium",
-      "tickers": ["MSTR", "BTC"],
+      "tickers": ["MSTR", "BTC", "STRC"],
       "signals": ["ticker", "dramatic", "engagement"],
       "direction": "bullish",
       "breakdown": {"engagement": 18, "ticker": 20, "dramatic": 10, "policy": 0},
       "engagement_spike": 5.2,
       "metrics": {
-        "views":   {"value": "4.1M", "label": "Views",   "class": "spike", "vs": "5\u00d7 avg"},
+        "views":   {"value": "5.1M", "label": "Views",   "class": "spike", "vs": "5\u00d7 avg"},
         "reposts": {"value": "14K",  "label": "Reposts", "class": "spike", "vs": ""},
         "likes":   {"value": "42K",  "label": "Likes",   "class": "spike", "vs": ""},
         "replies": {"value": "6.2K", "label": "Replies", "class": "above", "vs": ""}
       },
-      "source_url": "https://coinspectator.com/bitcoin-com/2026/04/12/michael-saylors-think-bigger-signals-mega-bitcoin-buy-as-global-tension-shakes-markets/"
-    },
-    {
-      "author": "Dan Ives",
-      "handle": "@DanIvesWedbush",
-      "role": "Wedbush Securities \u2014 Managing Director, Senior Tech Analyst",
-      "platform": "X",
-      "time": "~3 days ago (Apr 10, 2026)",
-      "content": "The take that Anthropic is eating $PLTR's lunch is the wrong take and a fictional narrative. Palantir is at the epicenter of leaders in the AI Revolution and is a Core AI winner and tech leader. Burry is fundamentally misreading what PLTR actually sells \u2014 an ontology/digital twin that acts as a digital brain for an entire organization \u2014 not a chatbot API. This is way overblown. Maintaining Outperform, $230 PT on $PLTR.",
-      "score": 43,
-      "scoreClass": "medium",
-      "tickers": ["PLTR"],
-      "signals": ["engagement", "ticker", "dramatic"],
-      "direction": "bullish",
-      "breakdown": {"engagement": 15, "ticker": 13, "dramatic": 15, "policy": 0},
-      "engagement_spike": 4.8,
-      "metrics": {
-        "views":   {"value": "~2.2M", "label": "Views",   "class": "above", "vs": "~5\u00d7 avg (est)"},
-        "reposts": {"value": "~7K",   "label": "Reposts", "class": "above", "vs": ""},
-        "likes":   {"value": "~18K",  "label": "Likes",   "class": "above", "vs": ""},
-        "replies": {"value": "~3.2K", "label": "Replies", "class": "above", "vs": ""}
-      },
-      "note": "Direct rebuttal to Burry's PLTR short thesis. Ives argues Burry misunderstands Palantir's product (ontology/digital twin vs API chatbot). $230 PT implies >150% upside from current ~$127 market price.",
-      "source_url": "https://www.benzinga.com/markets/tech/26/04/51747675/michael-burry-anthropic-palantir-wrong-take-top-analyst"
+      "source_url": "https://www.coindesk.com/markets/2026/04/13/strategy-signals-another-bitcoin-buy-as-company-needs-just-2-annual-btc-growth-to-cover-dividends"
     },
     {
       "author": "Jeffrey Gundlach",
@@ -249,6 +229,29 @@ var LIVE_DATA = {
       "source_url": "https://www.benzinga.com/markets/bonds/26/04/51645327/billionaire-bond-king-warns-investors-rules-can-be-changed"
     },
     {
+      "author": "Dan Ives",
+      "handle": "@DanIvesWedbush",
+      "role": "Wedbush Securities \u2014 Managing Director, Senior Tech Analyst",
+      "platform": "X",
+      "time": "~3 days ago (Apr 10, 2026)",
+      "content": "The take that Anthropic is eating $PLTR's lunch is the wrong take and a fictional narrative. Palantir is at the epicenter of leaders in the AI Revolution and is a Core AI winner and tech leader. Burry is fundamentally misreading what PLTR actually sells \u2014 an ontology/digital twin that acts as a digital brain for an entire organization \u2014 not a chatbot API. This is way overblown. Maintaining Outperform, $230 PT on $PLTR.",
+      "score": 43,
+      "scoreClass": "medium",
+      "tickers": ["PLTR"],
+      "signals": ["engagement", "ticker", "dramatic"],
+      "direction": "bullish",
+      "breakdown": {"engagement": 15, "ticker": 13, "dramatic": 15, "policy": 0},
+      "engagement_spike": 4.8,
+      "metrics": {
+        "views":   {"value": "~2.2M", "label": "Views",   "class": "above", "vs": "~5\u00d7 avg (est)"},
+        "reposts": {"value": "~7K",   "label": "Reposts", "class": "above", "vs": ""},
+        "likes":   {"value": "~18K",  "label": "Likes",   "class": "above", "vs": ""},
+        "replies": {"value": "~3.2K", "label": "Replies", "class": "above", "vs": ""}
+      },
+      "note": "Direct rebuttal to Burry's PLTR short thesis. Ives argues Burry misunderstands Palantir's product (ontology/digital twin vs API chatbot). $230 PT implies >150% upside from current ~$127 market price.",
+      "source_url": "https://www.benzinga.com/markets/tech/26/04/51747675/michael-burry-anthropic-palantir-wrong-take-top-analyst"
+    },
+    {
       "author": "Mohamed El-Erian",
       "handle": "@elerianm",
       "role": "Allianz Chief Economic Advisor, former PIMCO CEO",
@@ -269,12 +272,35 @@ var LIVE_DATA = {
         "replies": {"value": "890",  "label": "Replies", "class": "above", "vs": ""}
       },
       "source_url": "https://money.whatfinger.com/2026/04/10/dont-share-the-widespread-economic-optimism-on-wall-street-says-allianz-mohamed-el-erian/"
+    },
+    {
+      "author": "Bill Ackman",
+      "handle": "@BillAckman",
+      "role": "Pershing Square Capital Management",
+      "platform": "X",
+      "time": "~38 hours ago (Apr 11\u201312, 2026)",
+      "content": "Let me tell you about something that has been keeping me up at night... [2,400-word post detailing termination dispute at family office TABLE Management. Former in-house lawyer ($1.05M salary) rejected 3-month severance and is demanding ~$2M (2 years' salary), alleging gender discrimination/harassment linked to Ackman's nephew's conduct during a 30% staff restructuring. Ackman calls it a 'shakedown' and plans to fight. Elon Musk, Chamath Palihapitiya, Donald Trump Jr. publicly backed Ackman. Note: Timing is notable \u2014 the post landed days before Pershing Square's anticipated $10B IPO filing, suggesting legal risk disclosure or reputational defense strategy.]",
+      "score": 37,
+      "scoreClass": "low",
+      "tickers": [],
+      "signals": ["engagement"],
+      "direction": "neutral",
+      "breakdown": {"engagement": 30, "ticker": 0, "dramatic": 7, "policy": 0},
+      "engagement_spike": 11.0,
+      "metrics": {
+        "views":   {"value": "11M",  "label": "Views",   "class": "spike", "vs": "~11\u00d7 avg"},
+        "reposts": {"value": "28K",  "label": "Reposts", "class": "spike", "vs": ""},
+        "likes":   {"value": "23K",  "label": "Likes",   "class": "spike", "vs": ""},
+        "replies": {"value": "9.7K", "label": "Replies", "class": "spike", "vs": ""}
+      },
+      "note": "Extremely high engagement but low market-signal content. Included for engagement anomaly and Pershing Square IPO timing risk. Not a market-moving post in itself.",
+      "source_url": "https://finance.yahoo.com/markets/stocks/articles/bill-ackman-ranted-x-2m-093500648.html"
     }
   ],
   "critical_alerts": [
-    "\uD83D\uDEA8 BREAKING \u2014 Donald Trump (TRUTH SOCIAL, Apr 12\u201313): US NAVAL BLOCKADE OF STRAIT OF HORMUZ ACTIVE as of 10AM ET Apr 13. Peace talks in Islamabad collapsed after 21 hours. Brent crude +8% to ~$103. European gas +18%. S&P 500 futures -0.7%. Iran IRGC threatening 'severe force.' Strait handles ~20% of global seaborne oil. Score: 97.",
-    "Donald Trump (TRUTH SOCIAL, Apr 8): 50% tariffs on ALL goods from any country supplying military weapons to Iran \u2014 effective immediately, no exclusions or exemptions. Aimed explicitly at China. Score: 82.",
-    "Michael Burry (@michaeljburry, Apr 8\u201310): Confirmed ~$1B short on $PLTR via long-dated puts ($50 & $100 strike vs ~$127 market). 'Not selling today.' PLTR -7.3% on release, down 28% YTD. Also shorting $NVDA (Jan 2027 $115 puts). Score: 80."
+    "\uD83D\uDEA8 ACTIVE \u2014 Donald Trump (TRUTH SOCIAL, Apr 12\u201313): US NAVAL BLOCKADE OF STRAIT OF HORMUZ active as of 10AM ET Apr 13. Islamabad peace talks collapsed after 21 hours. Brent crude +8% ~$103. European gas +18%. S&P futures -0.7%. Gold $4,803/oz. Iran IRGC threatening 'severe force.' Strait handles ~20% of global seaborne oil (~20M bbl/day). Score: 97.",
+    "\uD83D\uDEA8 NEW THIS SCAN \u2014 Donald Trump (Fox News, Apr 13): Explicitly named CHINA in 50% tariff threat over Iran arms \u2014 'if we catch them doing that, they get a 50% tariff.' Reports of China preparing AA missile shipment to Iran. Layered escalation on top of blockade. Score: 85.",
+    "\uD83D\uDEA8 UPDATED THIS SCAN \u2014 Michael Burry (Substack, Apr 13): Added Jan 2027 $115-strike NVDA puts ($3.30) \u2014 confirms expanding short against AI infrastructure. Maintains ~$1B notional PLTR puts. 'PLTR worth less than half market price.' PLTR -28% YTD, -7.3% on original Apr 8 post. Score: 82."
   ],
   "market_snapshot": {
     "brent_crude": "+8% to ~$103/barrel (up 31% since war began Feb 28)",
@@ -283,8 +309,10 @@ var LIVE_DATA = {
     "gold": "$4,803/oz (safe haven bid)",
     "defense_stocks": "LMT, RTX strongly up",
     "energy_stocks": "XOM, CVX strongly up",
-    "bitcoin": "Falling \u2014 risk-off, -2.5% on escalation",
+    "bitcoin": "Falling \u2014 risk-off, -2.5% on escalation (Saylor signaling dip buy)",
+    "china_exposure": "FXI, MCHI under pressure on explicit China tariff naming",
     "context": "IEA: 'Largest supply disruption in history of global oil market.' ~20M barrels/day at risk. At $170/barrel, Bloomberg estimates stagflationary shock doubling impact on inflation and growth."
   },
-  "summary": "\uD83D\uDEA8 CRITICAL: US Naval blockade of Strait of Hormuz activated 10AM ET (Apr 13) after Islamabad peace talks collapsed \u2014 Brent +8% to $103, European gas +18%, S&P futures -0.7%, Gold $4,803/oz. Background bearish signals confirmed this scan: Burry's $1B PLTR short (target $50, -61% from market, down 28% YTD), Trump's 50% Iran-weapons tariffs, Dalio's 'world war Step 9 of 13', Ackman's 'economic nuclear winter', Gundlach's 'it\u2019s 2007 for private credit' and '100% non-US stocks' call."
+  "scan_notes": "NEW THIS HOUR: (1) Trump explicitly named China in tariff threat on Fox News Sunday Apr 13 \u2014 escalates beyond general Apr 8 TRUTH post. (2) Burry expanded NVDA short via new Substack Apr 13 \u2014 added Jan 2027 $115 puts on top of existing $100 puts. (3) Ackman viral employee rant added (11M views, Apr 11\u201312) \u2014 low market signal but high engagement anomaly ahead of Pershing Square IPO.",
+  "summary": "\uD83D\uDEA8 CRITICAL: Three active critical-level signals this hour \u2014 (1) US Naval blockade of Strait of Hormuz in effect since 10AM ET (Brent +8%, gas +18%); (2) Trump names China directly in 50% tariff threat over alleged Iran arms shipment; (3) Burry expands AI infrastructure short \u2014 new NVDA puts added today on top of $1B PLTR short. Only Saylor's 'Think Bigger' BTC dip-buy signal is bullish. Gundlach's '100% non-US' and Dalio's 'sell all debt, buy gold' remain active background signals."
 };
