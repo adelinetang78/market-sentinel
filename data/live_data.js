@@ -1,5 +1,5 @@
 var LIVE_DATA = {
-  "scan_time": "2026-04-15T10:00:00Z",
+  "scan_time": "2026-04-15T13:00:00Z",
   "posts_found": [
     {
       "author": "Donald Trump",
@@ -22,7 +22,7 @@ var LIVE_DATA = {
         "replies": {"value": "65K+",  "label": "Replies", "class": "spike", "vs": ""}
       },
       "market_impact": "Brent crude peaked ~$103/barrel (Apr 13); fell to $94.79 on Apr 14 as peace talks resumed. European gas futures eased from +18% highs. S&P 500 recovering. Gold ~$4,750+/oz. Defense stocks (LMT, RTX) and energy (XOM, CVX) remain elevated. IEA: 'largest supply disruption in history of global oil market.' Strait carries ~20% of global seaborne oil (~20M barrels/day).",
-      "note": "UPDATED APR 15: VP Vance signalled Apr 14 that a 2nd round of US-Iran talks could restart 'within two days' in Islamabad. WTI crude fell -8% to $91.28 on the news; Brent -4% to $94.79. Oil reversal is key signal \u2014 blockade remains in effect but diplomacy back on the table. Watch: if talks fail again, oil could retest $103+. Trump-Xi summit also confirmed for May 14\u201315 in Beijing, adding a tariff resolution wildcard.",
+      "note": "UPDATED APR 15 13:00Z: VP Vance signalled Apr 14 that a 2nd round of US-Iran talks could restart 'within two days' in Islamabad. WTI crude fell -8% to $91.28 on the news; Brent -4% to $94.79. Blockade remains in effect but diplomacy back on the table. APR 15 OVERNIGHT: Trump posted new series attacking NATO allies for not supporting Iran war \u2014 'None of these people, including our own, very disappointing, NATO, understood anything unless they have pressure placed upon them!!' Threatened to cut ALL trade with Spain over base access refusal. Watch: if talks fail again, oil could retest $103+. Trump-Xi summit confirmed for May 14\u201315 in Beijing.",
       "source_url": "https://www.cnbc.com/2026/04/12/trump-iran-war-strait-of-hormuz.html"
     },
     {
@@ -54,7 +54,7 @@ var LIVE_DATA = {
       "role": "Scion Asset Management, famous short seller",
       "platform": "X + Substack",
       "time": "Apr 8\u201313, 2026 \u2014 PLTR short confirmed; NVDA puts expanded Apr 13; Chinese tech longs confirmed Apr 12",
-      "content": "Anthropic is eating $PLTR Palantir's lunch. Anthropic captured 73% of all new enterprise spending per Ramp. Went from $9B to $30B ARR in months. It took $PLTR 20 years to get to $5 Billion. PLTR can have government, which is low margin and small. Anthropic offers an API; Palantir's FDE model charges for human labor. [Original X post deleted Apr 8 after causing ~$23B in PLTR market cap loss, stock -7.3%. Apr 10 Substack Trade Alert confirms still short ~$1B notional via long-dated puts \u2014 June 2027 $50 strike and Dec 2026 $100 strike. 'PLTR is fundamentally worth less than half its current market price.' Stock down 28% YTD. UPDATED APR 13: New Substack disclosure \u2014 added Jan 2027 $115-strike $NVDA puts at $3.30. Compares Nvidia to Cisco \u2014 lost 90% and took 25 years to recover its 2000 peak. Estimates AI hyperscalers will understate depreciation by $176B in 2026\u20132028. APR 12 GuruFocus disclosure: long BABA and JD.com \u2014 'significant add,' JD = ~6% of portfolio. Long China consumer, short US AI infrastructure.]",
+      "content": "Anthropic is eating $PLTR Palantir's lunch. Anthropic captured 73% of all new enterprise spending per Ramp. Went from $9B to $30B ARR in months. It took $PLTR 20 years to get to $5 Billion. PLTR can have government, which is low margin and small. Anthropic offers an API; Palantir's FDE model charges for human labor. [Original X post deleted Apr 8 after causing ~$23B in PLTR market cap loss, stock -7.3%. Apr 10 Substack Trade Alert confirms still short ~$1B notional via long-dated puts \u2014 June 2027 $50 strike and Dec 2026 $100 strike. 'PLTR is fundamentally worth less than half its current market price.' Stock down 28% YTD. UPDATED APR 13: New Substack disclosure \u2014 added Jan 2027 $115-strike $NVDA puts at $3.30. Compares Nvidia to Cisco. Estimates AI hyperscalers will understate depreciation by $176B in 2026\u20132028. APR 12 GuruFocus disclosure: long BABA and JD.com \u2014 JD = ~6% of portfolio. Long China consumer, short US AI infrastructure.]",
       "score": 82,
       "scoreClass": "critical",
       "tickers": ["PLTR", "NVDA", "META", "GOOGL", "MSFT", "AMZN"],
@@ -68,7 +68,7 @@ var LIVE_DATA = {
         "likes":   {"value": "35.4K", "label": "Likes",   "class": "spike", "vs": ""},
         "replies": {"value": "4.2K",  "label": "Replies", "class": "spike", "vs": ""}
       },
-      "note": "UPDATED APR 15: Burry stays short PLTR despite Trump's Apr 10 Truth Social endorsement of Palantir ('I am not selling today'). NVDA Jan 2027 $115 puts confirmed at $3.30 entry. JD.com is now 6% of portfolio \u2014 explicit China consumer long thesis vs US AI short. Portfolio: short PLTR/NVDA/US AI hyperscalers + long BABA/JD Chinese consumer. Classic pair trade macro structure.",
+      "note": "UPDATED APR 15 13:00Z: Burry stays short PLTR despite Trump's Apr 10 Truth Social endorsement of Palantir. NVDA Jan 2027 $115 puts confirmed at $3.30 entry. JD.com is now 6% of portfolio \u2014 explicit China consumer long thesis vs US AI short. Portfolio: short PLTR/NVDA/US AI hyperscalers + long BABA/JD Chinese consumer. Classic 'pair trade' macro structure.",
       "source_url": "https://michaeljburry.substack.com/p/trade-alert-friday-april-10-2026"
     },
     {
@@ -95,12 +95,35 @@ var LIVE_DATA = {
       "source_url": "https://x.com/SecScottBessent/status/2035131840604881359"
     },
     {
+      "author": "Scott Bessent",
+      "handle": "Scott Bessent (WSJ event statement)",
+      "role": "US Treasury Secretary",
+      "platform": "X",
+      "time": "Apr 14, 2026 \u2014 WSJ event in Washington \u2014 NEW THIS SCAN",
+      "content": "We had a setback at the Supreme Court in terms of the tariff policy, but we will be implementing or conducting Section 301 studies, so the tariffs could be back in place at the previous level by beginning of July.",
+      "score": 52,
+      "scoreClass": "medium",
+      "tickers": [],
+      "signals": ["policy", "dramatic"],
+      "direction": "bearish",
+      "breakdown": {"engagement": 10, "ticker": 0, "dramatic": 12, "policy": 30},
+      "engagement_spike": 3.0,
+      "metrics": {
+        "views":   {"value": "Est. 800K+", "label": "Views",   "class": "above", "vs": "Bloomberg + CNBC coverage"},
+        "reposts": {"value": "Moderate",   "label": "Reposts", "class": "above", "vs": ""},
+        "likes":   {"value": "Moderate",   "label": "Likes",   "class": "above", "vs": ""},
+        "replies": {"value": "Moderate",   "label": "Replies", "class": "above", "vs": ""}
+      },
+      "note": "NEW THIS SCAN. Significant policy signal: Trump tariff regime (struck down by Supreme Court) could be fully reinstated via Section 301 studies by July 2026. Signals continued trade war escalation irrespective of court setbacks. Bearish for trade-exposed equities and global supply chains. Consistent with Trump's escalating threats against NATO allies and Spain.",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-04-14/trump-tariff-rates-could-be-restored-by-early-july-bessent"
+    },
+    {
       "author": "Ray Dalio",
       "handle": "@RayDalio",
       "role": "Bridgewater Associates founder, macro investor",
       "platform": "X",
-      "time": "~6 days ago (Apr 9, 2026) + Apr 11 Hormuz warning",
-      "content": "It's Official: The World Order Has Broken Down. We Are In A World War That Isn't Going To End Anytime Soon. The US-Israel-Iran war is just part of a world war that we are in. We are at Step 9 of a 13-step cycle that historically precedes all-out world wars. Global markets are failing to adequately price in the long-term implications of a fragmented, multipolar conflict environment \u2014 leaving portfolios exposed to sustained inflationary pressures, regime shifts in global trade, and heightened volatility across asset classes. The post-1945 world order is dead. [Apr 11 update: whoever controls the Strait of Hormuz wins the Iran war \u2014 and the dollar's fate hangs in the balance. 'Sell out of all debt and buy gold.' Compares potential US failure at Hormuz to Britain's 1956 Suez Crisis humiliation.]",
+      "time": "~6 days ago (Apr 9, 2026) + Apr 11 Hormuz warning + Apr 13 NBC Meet the Press",
+      "content": "It's Official: The World Order Has Broken Down. We Are In A World War That Isn't Going To End Anytime Soon. The US-Israel-Iran war is just part of a world war that we are in. We are at Step 9 of a 13-step cycle that historically precedes all-out world wars. [Apr 11 update: 'Sell out of all debt and buy gold.' Compares potential US failure at Hormuz to Britain's 1956 Suez Crisis humiliation. APR 13 NBC Meet the Press: 'Right now, we are at a decision-making point and very close to a recession. Something worse than a recession if this isn't handled well.']",
       "score": 68,
       "scoreClass": "high",
       "tickers": ["GLD"],
@@ -114,7 +137,7 @@ var LIVE_DATA = {
         "likes":   {"value": "42K",  "label": "Likes",   "class": "spike", "vs": ""},
         "replies": {"value": "2.1K", "label": "Replies", "class": "above", "vs": ""}
       },
-      "note": "Dalio specifically advises: sell debt, buy gold. Estimates markets are badly mispricing duration and tail risk. Analogizes US naval overextension to British Suez disaster. His 13-step world war cycle places us at Step 9 \u2014 4 steps before 'all-out world war' conditions. If peace talks restart (Apr 14 signal), watch for Dalio to revise cycle position.",
+      "note": "UPDATED APR 15 13:00Z: Dalio recession warning on NBC Meet the Press (Apr 13): 'very close to a recession' + 'something worse than a recession if this isn't handled well.' Specific call: sell debt, buy gold. 13-step world war cycle at Step 9. If peace talks restart, watch for Dalio to revise cycle position.",
       "source_url": "https://time.com/article/2026/04/09/ray-dalio-we-may-be-entering-a-world-war/"
     },
     {
@@ -122,7 +145,7 @@ var LIVE_DATA = {
       "handle": "@BillAckman",
       "role": "Pershing Square Capital Management \u2014 IPO roadshow ACTIVE",
       "platform": "X",
-      "time": "Apr 13\u201314, 2026 \u2014 NEW THIS SCAN",
+      "time": "Apr 13\u201314, 2026",
       "content": "Today we are kicking off the roadshow for the combined IPO of Pershing Square USA ($PSUS) and Pershing Square Inc. ($PS). We are seeking to raise up to $10 billion. PSUS will trade on the NYSE at $50/share; pricing expected April 28. Both entities list on NYSE. The structure offers investors the most extraordinary economic characteristics we have ever offered \u2014 no performance fees on the closed-end fund. $2.8B private placement already secured from family offices, pension funds, and insurance companies. Lead banks: Citigroup, UBS, BofA, Jefferies, Wells Fargo.",
       "score": 55,
       "scoreClass": "medium",
@@ -137,7 +160,7 @@ var LIVE_DATA = {
         "likes":   {"value": "~21K",  "label": "Likes",   "class": "above", "vs": ""},
         "replies": {"value": "~3.1K", "label": "Replies", "class": "above", "vs": ""}
       },
-      "note": "NEW THIS SCAN. $10B dual IPO is the largest hedge fund/closed-end fund listing attempt in years. $2.8B private placement already locked in. Key risk: Ackman's viral 2,400-word family office dispute post (11M views, Apr 11\u201312) generated reputational noise ahead of pricing. Pricing April 28 \u2014 watch for roadshow feedback to leak through to market positioning.",
+      "note": "$10B dual IPO is the largest hedge fund/closed-end fund listing attempt in years. $2.8B private placement already locked in. Key risk: Ackman's viral 2,400-word family office dispute post (11M views, Apr 11\u201312) generated reputational noise ahead of pricing. Pricing April 28 \u2014 watch for roadshow feedback to leak through to market positioning.",
       "source_url": "https://www.bloomberg.com/news/articles/2026-04-13/ackman-s-joint-pershing-square-fund-ipo-begins-formal-marketing"
     },
     {
@@ -212,7 +235,7 @@ var LIVE_DATA = {
       "role": "Strategy Inc. (fmr MicroStrategy) Executive Chairman, Bitcoin",
       "platform": "X",
       "time": "Apr 12\u201313, 2026",
-      "content": "Bitcoin has won. The four-year cycle is dead. Price is now driven by capital flows. Global consensus is that BTC is digital capital. [Strategy acquired 13,927 BTC for ~$1 billion on Apr 13, average price $71,902/BTC. Strategy holds 766,970 BTC (~$54.47B). Strategy's breakeven annual BTC return is 2.05%, enabling an 'infinite cycle' of BTC accumulation. Post arrived as Bitcoin fell 2.5% on Hormuz escalation \u2014 Saylor buying the dip. STRC instrument: 30-day historical volatility 1.7% vs BTC 38%, enabling capital access without share dilution.]",
+      "content": "Bitcoin has won. The four-year cycle is dead. Price is now driven by capital flows. Global consensus is that BTC is digital capital. [Strategy acquired 13,927 BTC for ~$1 billion on Apr 13, average price $71,902/BTC. Strategy holds 766,970 BTC (~$54.47B). Strategy's breakeven annual BTC return is 2.05%, enabling an 'infinite cycle' of BTC accumulation. Saylor buying the dip as Bitcoin fell 2.5% on Hormuz escalation. STRC instrument: 30-day historical volatility 1.7% vs BTC 38%.]",
       "score": 51,
       "scoreClass": "medium",
       "tickers": ["MSTR", "BTC", "STRC"],
@@ -321,7 +344,7 @@ var LIVE_DATA = {
     }
   ],
   "critical_alerts": [
-    "\uD83D\uDEA8 ACTIVE \u2014 Donald Trump (TRUTH SOCIAL, Apr 12\u201313): US NAVAL BLOCKADE OF STRAIT OF HORMUZ active since 10AM ET Apr 13. UPDATED APR 14: VP Vance signals 2nd round of US-Iran talks could restart 'within two days' \u2014 WTI fell -8% to $91.28, Brent -4% to $94.79. Blockade remains in effect. Watch April 19 (Iran oil sanctions relief expiry) and any new Trump Truth Social post on ceasefire. Score: 97.",
+    "\uD83D\uDEA8 ACTIVE \u2014 Donald Trump (TRUTH SOCIAL, Apr 12\u201313): US NAVAL BLOCKADE OF STRAIT OF HORMUZ active since 10AM ET Apr 13. UPDATED APR 15 13:00Z: VP Vance signals 2nd round of US-Iran talks could restart 'within two days' \u2014 WTI fell -8% to $91.28, Brent -4% to $94.79. Blockade remains in effect. APR 15 OVERNIGHT: Trump also posted NATO allies attack spree threatening to cut all trade with Spain. Watch April 19 (Iran oil sanctions relief expiry). Score: 97.",
     "\uD83D\uDEA8 ACTIVE \u2014 Donald Trump (Fox News, Apr 13): Explicitly named CHINA in 50% tariff threat over Iran arms. NEW APR 15: Trump-Xi summit confirmed for May 14\u201315 in Beijing \u2014 potential resolution wildcard. Arms allegation unresolved and could trigger tariff before summit. Score: 85.",
     "\uD83D\uDEA8 UPDATED APR 13 \u2014 Michael Burry (Substack, Apr 13): PLTR short maintained despite Trump endorsement. Added Jan 2027 $115-strike NVDA puts ($3.30). NEW: Long BABA + JD (~6% of portfolio) \u2014 explicit 'long China consumer, short US AI infrastructure' pair trade structure confirmed. Score: 82."
   ],
@@ -338,6 +361,6 @@ var LIVE_DATA = {
     "pltr": "Down ~28% YTD; Burry vs Ives debate active. Burry: worth <$50. Ives: $230 PT.",
     "key_dates": "Apr 19: Iran sanctions relief expiry | Apr 28: Ackman PSUS IPO pricing | May 14\u201315: Trump-Xi summit"
   },
-  "scan_notes": "NEW THIS SCAN (APR 15): (1) Oil reversed sharply on Apr 14 \u2014 WTI -8%, Brent -4% as VP Vance signalled 2nd round of US-Iran peace talks possible 'within two days.' Blockade still in effect but diplomatic back-channel open. (2) Ackman $10B dual IPO roadshow confirmed active (Apr 13\u201314 launch, PSUS + PS, pricing Apr 28) \u2014 added as new post this scan. (3) Burry Chinese tech longs confirmed (BABA, JD ~6% of portfolio) \u2014 pair trade structure now complete: short PLTR/NVDA/US AI hyperscalers + long China consumer. (4) Trump-Xi Beijing summit confirmed for May 14\u201315 \u2014 tariff resolution wildcard for China exposure. No dramatically new posts from monitored accounts identified specifically on April 15.",
-  "summary": "\uD83D\uDEA8 CRITICAL alerts carry over: US-Iran naval blockade active but oil reversed -4% to -8% Apr 14 as 2nd peace talk round signals. Key pivot: if talks restart, energy shorts and defense longs begin unwinding \u2014 if they fail again, $103+ oil probable. Burry's short thesis expanding (PLTR + NVDA) now paired with explicit China consumer longs; Ackman IPO roadshow ($10B, pricing Apr 28) live; Gundlach private credit 2007 warning and '100% non-US stocks' call carry forward. Calendar: watch Apr 19 (Iran sanctions expiry), Apr 28 (Ackman IPO pricing), May 14\u201315 (Trump-Xi summit)."
+  "scan_notes": "APR 15 13:00Z SCAN: NEW \u2014 Bessent (Apr 14, WSJ event) stated tariffs could return to pre-Supreme Court-ruling levels by July via Section 301 studies; added as new post. NEW \u2014 Trump posted overnight NATO attack spree (Apr 14\u201315): threatened to cut ALL trade with Spain over Iran war base refusal and NATO 5% spending target. Dalio updated to include NBC Meet the Press recession warning (Apr 13): 'very close to a recession.' No dramatically new posts from other monitored accounts identified in this hourly scan window. All 3 critical alerts carry over unchanged.",
+  "summary": "\uD83D\uDEA8 CRITICAL alerts carry over: US-Iran naval blockade active but oil reversed -4% to -8% Apr 14 as 2nd peace talk round signals. NEW THIS SCAN: Bessent signals tariff regime return by July via Section 301; Trump escalates overnight with NATO/Spain trade threats. Dalio warns 'very close to recession' on NBC. Burry's short thesis (PLTR + NVDA) paired with China consumer longs; Ackman $10B IPO roadshow live (pricing Apr 28). Calendar: Apr 19 (Iran sanctions expiry), Apr 28 (Ackman IPO), May 14\u201315 (Trump-Xi summit)."
 };
